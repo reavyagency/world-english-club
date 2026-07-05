@@ -1,0 +1,53 @@
+# ---------- Node.js ----------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnp.*
+.yarn/*
+
+# ---------- Builds / output ----------
+dist/
+build/
+out/
+.next/
+.nuxt/
+.cache/
+coverage/
+
+# ---------- Environment / secrets ----------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets.json
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+
+# ---------- Editors / IDEs ----------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ---------- OS ----------
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ---------- Logs / temp ----------
+*.log
+logs/
+tmp/
+temp/
