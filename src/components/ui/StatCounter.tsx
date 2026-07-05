@@ -27,11 +27,7 @@ export function StatCounter({
   const [display, setDisplay] = useState(0);
 
   useEffect(() => {
-    if (!inView || displayOverride) return;
-    if (reduce) {
-      setDisplay(value);
-      return;
-    }
+    if (!inView || displayOverride || reduce) return;
     let raf = 0;
     let start: number | null = null;
     const step = (t: number) => {
@@ -46,9 +42,12 @@ export function StatCounter({
     return () => cancelAnimationFrame(raf);
   }, [inView, value, duration, reduce, displayOverride]);
 
+  // Sem animação (reduced-motion): mostra o valor final direto, sem setState no effect.
+  const shown = reduce ? value : display;
+
   return (
     <span ref={ref} className="tabular-nums">
-      {displayOverride ?? `${prefix}${display.toLocaleString("pt-BR")}${suffix}`}
+      {displayOverride ?? `${prefix}${shown.toLocaleString("pt-BR")}${suffix}`}
     </span>
   );
 }
