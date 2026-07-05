@@ -68,14 +68,16 @@ export default function V2() {
         </div>
       </section>
 
-      {/* Features */}
+      {/* Módulos */}
       <section className="border-y border-white/10 bg-white/5 py-24">
-        <div className="mx-auto grid max-w-6xl gap-6 px-6 sm:grid-cols-2 lg:grid-cols-4">
-          {site.features.map((f) => (
-            <div key={f.title}>
-              <div className="text-3xl">{f.icon}</div>
-              <h3 className="mt-4 font-semibold">{f.title}</h3>
-              <p className="mt-2 text-sm text-neutral-400">{f.description}</p>
+        <div className="mx-auto grid max-w-6xl gap-6 px-6 sm:grid-cols-3">
+          {site.modules.items.map((m) => (
+            <div key={m.tag}>
+              <div className="text-sm font-semibold uppercase tracking-widest text-emerald-400">
+                {m.tag}
+              </div>
+              <h3 className="mt-2 font-semibold">{m.title}</h3>
+              <p className="mt-2 text-sm text-neutral-400">{m.description}</p>
             </div>
           ))}
         </div>

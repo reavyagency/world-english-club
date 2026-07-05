@@ -1,253 +1,318 @@
 /**
- * Fonte única da copy do site (World English Club).
+ * FONTE ÚNICA da copy do site — World English Club (WEC).
  *
- * As 3 versões (/v1, /v2, /v3) consomem ESTE mesmo conteúdo.
- * O que muda entre elas é apenas o LAYOUT — o texto vem sempre daqui.
+ * As versões de layout (/v1, /v2, /v3) consomem ESTE mesmo conteúdo.
+ * O que muda entre elas é apenas o LAYOUT. Edite o texto aqui, uma vez.
  *
- * Os textos abaixo são placeholders realistas. Ajuste-os quando o
- * conteúdo final for definido (prompt de layout entra depois).
+ * ⚠️ GUARDA-CORPOS ÉTICOS: só use números/depoimentos REAIS. Onde o dado
+ * real ainda não existe, o valor abaixo é um placeholder marcado com
+ * `[[ ... ]]` — substitua, nunca invente.
+ *
+ * URLs (checkout, WhatsApp, Instagram) ficam em `src/config/brand.ts`
+ * e são configuráveis por variáveis de ambiente.
  */
-
-export type CTA = {
-  label: string;
-  href: string;
-};
-
-export type Feature = {
-  icon: string; // nome/emoji do ícone — cada versão decide como renderizar
-  title: string;
-  description: string;
-};
-
-export type Step = {
-  number: number;
-  title: string;
-  description: string;
-};
-
-export type Plan = {
-  name: string;
-  price: string;
-  period: string;
-  highlight?: boolean;
-  features: string[];
-  cta: CTA;
-};
-
-export type Testimonial = {
-  name: string;
-  role: string;
-  quote: string;
-};
-
-export type FAQ = {
-  question: string;
-  answer: string;
-};
 
 export const site = {
   brand: {
     name: "World English Club",
     shortName: "WEC",
-    tagline: "Fale inglês de verdade, com o mundo.",
+    tagline: "Do zero à conversação, sem promessas mágicas.",
   },
 
+  // Navegação do header sticky
   nav: [
     { label: "Método", href: "#metodo" },
-    { label: "Cursos", href: "#cursos" },
-    { label: "Depoimentos", href: "#depoimentos" },
+    { label: "Conteúdo", href: "#conteudo" },
     { label: "Planos", href: "#planos" },
-    { label: "Dúvidas", href: "#faq" },
-  ] as CTA[],
+    { label: "Depoimentos", href: "#depoimentos" },
+  ],
 
+  // Seção 1 — Hero
   hero: {
-    eyebrow: "Escola de inglês online",
-    title: "Aprenda inglês conversando desde a primeira aula",
+    eyebrow: "Curso de inglês online para brasileiros",
+    title: "Fale inglês com confiança — do zero ao intermediário (A1 → B1).",
     subtitle:
-      "Metodologia focada em conversação, professores nativos e turmas reduzidas. Do zero à fluência no seu ritmo.",
-    primaryCta: { label: "Começar agora", href: "#planos" } as CTA,
-    secondaryCta: { label: "Fazer aula experimental", href: "#contato" } as CTA,
+      "Sem promessas mágicas: método claro, prática orientada e um plano de estudos semana a semana. Você aprende, pratica e evolui no seu ritmo.",
+    // Prova social — SUBSTITUIR pelos números reais
+    socialProof: {
+      studentsLabel: "Mais de [[Nº real]] alunos já estudam com a WEC",
+      ratingLabel: "nota [[X,X]] em depoimentos",
+    },
+    primaryCta: { label: "Quero começar agora", href: "#planos" },
+    secondaryCta: { label: "Ver como funciona", href: "#metodo" },
+    seals: [
+      "7 dias de garantia incondicional",
+      "Acesso no celular e no computador",
+      "1 ano de acesso",
+    ],
+    media: {
+      caption: "Vídeo do produto — 16:9",
+      aspect: "16/9",
+    },
+    // Mantido para os layouts /v2 e /v3 (mesmos números da barra de credibilidade)
     stats: [
-      { value: "12k+", label: "alunos ativos" },
-      { value: "98%", label: "recomendam" },
-      { value: "40+", label: "países" },
+      { value: "~20 anos", label: "com o idioma" },
+      { value: "50+ aulas", label: "do A1 ao B1" },
+      { value: "1.000 palavras", label: "por tema" },
     ],
   },
 
-  features: [
-    {
-      icon: "🗣️",
-      title: "Conversação desde o dia 1",
-      description:
-        "Você fala inglês em todas as aulas. Nada de decorar regras sem usar na prática.",
-    },
-    {
-      icon: "🌎",
-      title: "Professores nativos",
-      description:
-        "Aprenda pronúncia e cultura reais com quem cresceu falando inglês.",
-    },
-    {
-      icon: "👥",
-      title: "Turmas reduzidas",
-      description:
-        "No máximo 4 alunos por turma, para que você fale o tempo todo.",
-    },
-    {
-      icon: "📱",
-      title: "Estude de qualquer lugar",
-      description:
-        "Aulas ao vivo e material na plataforma, no computador ou no celular.",
-    },
-  ] as Feature[],
+  // Seção 2 — Barra de credibilidade (count-up animado)
+  credibility: {
+    items: [
+      { value: 20, prefix: "~", suffix: " anos", label: "de experiência do criador com o idioma" },
+      { value: 50, prefix: "", suffix: "+ aulas", label: "do A1 ao B1, trilha estruturada" },
+      { value: 1000, prefix: "", suffix: " palavras", label: "essenciais organizadas por tema" },
+      { value: 1, prefix: "", suffix: "", label: "certificado de conclusão incluso", displayOverride: "Certificado" },
+    ],
+  },
 
+  // Seção 3 — Conexão emocional (dor → aspiração)
+  emotional: {
+    title: "Quantas oportunidades você já deixou passar por causa do inglês?",
+    body: [
+      "A vaga que pedia inglês. O filme sem legenda. A viagem em que você só apontou no cardápio. Cada mês sem evoluir é uma porta que continua fechada — e o problema não é falta de capacidade, é falta de um método claro e de prática constante.",
+      "A WEC existe pra mudar isso: uma trilha guiada, do básico à conversação, pensada pra quem já tentou e travou.",
+    ],
+  },
+
+  // Seção 4 — Método WEC (mantém `steps` p/ v2/v3)
   method: {
     id: "metodo",
-    title: "Um método pensado para você falar",
-    subtitle: "Simples, prático e comprovado por milhares de alunos.",
+    title: "Um método em 3 passos — estrutura, vocabulário e prática.",
+    subtitle: "Simples, prático e pensado para você falar desde a primeira aula.",
     steps: [
       {
         number: 1,
-        title: "Diagnóstico de nível",
+        icon: "blocks",
+        title: "Estrutura com prática",
         description:
-          "Descobrimos seu ponto de partida e montamos uma trilha sob medida.",
+          "Construir frases: tempos verbais, pronomes, afirmativa/negativa/interrogativa, com exercícios desde a 1ª aula.",
       },
       {
         number: 2,
-        title: "Aulas ao vivo",
+        icon: "book-open",
+        title: "Vocabulário com prática",
         description:
-          "Encontros semanais focados em conversação com professores nativos.",
+          "Temas reais e úteis, com repetições inteligentes que fixam cada palavra.",
       },
       {
         number: 3,
-        title: "Prática guiada",
+        icon: "repeat",
+        title: "Prática constante",
         description:
-          "Exercícios, clubes de conversa e feedback contínuo entre as aulas.",
+          "Áudios, PDFs, textos, quizzes e simulações de situações reais (viagem, trabalho, rotina) para desenvolver fluência.",
       },
-      {
-        number: 4,
-        title: "Evolução real",
-        description:
-          "Acompanhe seu progresso e conquiste a fluência com confiança.",
-      },
-    ] as Step[],
+    ],
+    cta: { label: "Ver os planos", href: "#planos" },
   },
 
+  // Seção 5 — O que você recebe (módulos)
+  modules: {
+    id: "conteudo",
+    title: "3 módulos que te levam do alfabeto à conversação.",
+    subtitle: "50+ aulas estruturadas, com PDFs, MP3s, quizzes e simulações reais.",
+    items: [
+      {
+        tag: "Módulo 1",
+        title: "Fundamentos",
+        description:
+          "Verbo To Be, tempos verbais, pronomes, perguntas, preposições, futuro e as 1.000 palavras essenciais.",
+      },
+      {
+        tag: "Módulo 2",
+        title: "Vocabulário e situações",
+        description:
+          "Profissões, casa, comida, cidade, lugares — em blocos de 50 palavras.",
+      },
+      {
+        tag: "Módulo 3",
+        title: "Consolidação e fluência",
+        description:
+          "Phrasal verbs, expressões, negócios, tecnologia, internet e textos temáticos.",
+      },
+    ],
+    bonus: {
+      icon: "luggage",
+      tag: "Bônus",
+      title: "Trip Tip — inglês de sobrevivência para viagem",
+      description:
+        "Aeroporto, avião, táxi, hotel, restaurante e supermercado: o inglês que você usa na prática ao viajar.",
+    },
+    gradeToggleLabel: "Ver a grade completa de aulas",
+    grade: [
+      "Alfabeto e pronúncia",
+      "Verbo To Be (afirmativa, negativa, interrogativa)",
+      "Pronomes pessoais e possessivos",
+      "Presente simples e presente contínuo",
+      "Passado simples e passado contínuo",
+      "Futuro (will / going to)",
+      "Preposições de tempo e lugar",
+      "1.000 palavras essenciais por tema",
+      "Vocabulário: profissões, casa, comida, cidade",
+      "Phrasal verbs e expressões idiomáticas",
+      "Inglês para negócios, tecnologia e internet",
+      "Simulações de situações reais + quizzes",
+    ],
+  },
+
+  // Seção 6 — Planos (mantém price/period/features/cta p/ v2/v3)
   plans: {
     id: "planos",
-    title: "Escolha o plano ideal para você",
-    subtitle: "Cancele quando quiser. Sem multa, sem burocracia.",
+    title: "Escolha seu plano e comece hoje.",
+    subtitle: "Sem promessas mágicas. Cancele quando quiser.",
     items: [
       {
-        name: "Essencial",
-        price: "R$ 149",
-        period: "/mês",
-        features: [
-          "1 aula em grupo por semana",
-          "Acesso à plataforma",
-          "Clubes de conversa mensais",
-        ],
-        cta: { label: "Assinar Essencial", href: "#contato" },
-      },
-      {
-        name: "Premium",
-        price: "R$ 299",
-        period: "/mês",
+        name: "Mentoria",
+        badge: "MAIS COMPLETO",
         highlight: true,
+        price: "R$ 297",
+        period: "/mês",
+        perDay: "≈ R$ 9,90 por dia",
         features: [
-          "2 aulas em grupo por semana",
-          "1 aula particular por mês",
-          "Acesso completo à plataforma",
-          "Clubes de conversa semanais",
+          "Tudo do plano Autoestudo",
+          "1 aula individual de conversação por semana",
+          "Correções e feedback do professor",
+          "Suporte por WhatsApp",
         ],
-        cta: { label: "Assinar Premium", href: "#contato" },
+        cta: { label: "Quero a Mentoria", href: "#planos" },
       },
       {
-        name: "Intensivo",
-        price: "R$ 549",
+        name: "Autoestudo",
+        badge: "MAIS POPULAR PARA COMEÇAR",
+        highlight: false,
+        price: "R$ 69,90",
         period: "/mês",
+        perDay: "≈ R$ 2,30 por dia",
         features: [
-          "Aulas particulares ilimitadas",
-          "Trilha acelerada de fluência",
-          "Suporte prioritário",
-          "Certificado de conclusão",
+          "Todos os módulos A1 → B1",
+          "PDFs + MP3s + quizzes",
+          "1 ano de acesso",
+          "Atualizações inclusas",
         ],
-        cta: { label: "Assinar Intensivo", href: "#contato" },
+        cta: { label: "Garantir acesso", href: "#planos" },
       },
-    ] as Plan[],
+    ],
+    trustFooter: [
+      "Pagamento seguro",
+      "7 dias de garantia incondicional",
+      "Cancele quando quiser",
+    ],
   },
 
+  // Seção 7 — Depoimentos (SUBSTITUIR por reais)
   testimonials: {
     id: "depoimentos",
-    title: "Histórias de quem já fala inglês",
+    title: "Quem estuda com a WEC recomenda.",
     items: [
       {
-        name: "Mariana Alves",
-        role: "Analista de Marketing",
+        name: "[[Nome do aluno 1]]",
+        role: "[[de onde saiu → aonde chegou]]",
         quote:
-          "Em 6 meses saí do básico para conseguir liderar reuniões em inglês no trabalho.",
+          "[[Depoimento real do aluno 1 — resultado concreto. Preferir vídeo.]]",
+        hasVideo: true,
       },
       {
-        name: "Rafael Costa",
-        role: "Desenvolvedor",
-        quote:
-          "As turmas pequenas fizeram toda a diferença. Falo muito mais do que em cursos tradicionais.",
+        name: "[[Nome do aluno 2]]",
+        role: "[[de onde saiu → aonde chegou]]",
+        quote: "[[Depoimento real do aluno 2 — resultado concreto.]]",
+        hasVideo: false,
       },
       {
-        name: "Juliana Prado",
-        role: "Estudante de intercâmbio",
-        quote:
-          "Cheguei nos EUA me sentindo segura para conversar sobre qualquer assunto.",
+        name: "[[Nome do aluno 3]]",
+        role: "[[de onde saiu → aonde chegou]]",
+        quote: "[[Depoimento real do aluno 3 — resultado concreto.]]",
+        hasVideo: false,
       },
-    ] as Testimonial[],
+    ],
   },
 
+  // Seção 8 — Autoridade (John Silva)
+  author: {
+    id: "criador",
+    title: "Criado por quem aprendeu na prática — e ensina do jeito que funciona.",
+    badge: "Criador & professor",
+    name: "John Silva",
+    body: [
+      "John Silva estuda inglês desde os 12 anos e soma quase duas décadas com o idioma. Aprofundou pronúncia e fluência com uma mentora americana, aplicou o inglês diariamente no comércio exterior e viveu no Canadá.",
+      "De volta ao Brasil, começou dando aulas particulares — e desse trabalho de base nasceu o World English Club.",
+    ],
+  },
+
+  // Seção 9 — Garantia
+  guarantee: {
+    title: "Compre sem medo: 7 dias de garantia incondicional.",
+    body: "Acreditamos no valor do curso. Se em até 7 dias você achar que não é pra você, devolvemos 100% do valor — sem perguntas. O risco é nosso.",
+    seals: [
+      { icon: "calendar-clock", title: "1 ano de acesso", description: "Estude quando e onde quiser." },
+      { icon: "smartphone", title: "Web ou app", description: "No celular ou no computador." },
+    ],
+  },
+
+  // Seção 10 — FAQ
   faq: {
     id: "faq",
     title: "Perguntas frequentes",
     items: [
       {
-        question: "Preciso ter conhecimento prévio de inglês?",
+        question: "Quanto tempo preciso estudar?",
         answer:
-          "Não. Temos turmas do nível zero ao avançado. Fazemos um diagnóstico para te posicionar na trilha certa.",
+          "30–45 min por dia, 5x na semana — menos que 1 episódio de série por dia.",
       },
       {
-        question: "As aulas são ao vivo ou gravadas?",
-        answer:
-          "As aulas principais são ao vivo com professores nativos. O material de apoio fica disponível na plataforma.",
+        question: "É para iniciantes?",
+        answer: "Sim — do A1 ao B1, com uma trilha clara do básico à conversação.",
       },
       {
-        question: "Posso cancelar quando quiser?",
-        answer:
-          "Sim. Todos os planos são sem fidelidade — você cancela quando quiser, sem multa.",
+        question: "Tem certificado?",
+        answer: "Sim, certificado de conclusão incluso.",
       },
       {
-        question: "Como funciona a aula experimental?",
-        answer:
-          "É uma aula gratuita para você conhecer o método e tirar dúvidas antes de assinar.",
+        question: "Funciona no celular?",
+        answer: "Sim, 100% responsivo — web e app, celular ou computador.",
       },
-    ] as FAQ[],
+      {
+        question: "E se eu não gostar?",
+        answer: "7 dias de garantia, reembolso total, sem perguntas.",
+      },
+      {
+        question: "Já sei um pouco de inglês, serve?",
+        answer:
+          "Sim — o ideal é o plano com Mentoria, para revisar e ganhar segurança na conversação.",
+      },
+      {
+        question: "Funciona pra quem já tentou e desistiu?",
+        answer:
+          "Sim — o diferencial é a trilha guiada + prática, justamente o que falta em apps soltos.",
+      },
+    ],
   },
 
+  // Seção 11 — Fechamento
   finalCta: {
-    id: "contato",
-    title: "Pronto para falar inglês com o mundo?",
-    subtitle: "Faça sua aula experimental gratuita e comece hoje mesmo.",
-    cta: { label: "Quero minha aula gratuita", href: "#" } as CTA,
+    id: "comecar",
+    title: "Comece hoje a falar o inglês que abre portas.",
+    subtitle:
+      "Você já viu o método, os módulos e a garantia. O próximo passo é simples: escolha seu plano e dê o primeiro passo ainda hoje — com 7 dias para testar sem risco.",
+    primaryCta: { label: "Quero começar agora", href: "#planos" },
+    secondaryCta: { label: "Tirar dúvida no WhatsApp", href: "#" },
+    // Mantido para o layout /v3
+    cta: { label: "Quero começar agora", href: "#planos" },
   },
 
   footer: {
     copyright: `© ${new Date().getFullYear()} World English Club. Todos os direitos reservados.`,
+    legal:
+      "Garantia legal conforme o Código de Defesa do Consumidor (art. 49). [[Razão social / CNPJ]]",
     links: [
       { label: "Termos de uso", href: "#" },
       { label: "Privacidade", href: "#" },
-      { label: "Contato", href: "#contato" },
-    ] as CTA[],
+      { label: "Contato", href: "#comecar" },
+    ],
     social: [
+      { label: "WhatsApp", href: "#" },
       { label: "Instagram", href: "#" },
-      { label: "YouTube", href: "#" },
-      { label: "LinkedIn", href: "#" },
-    ] as CTA[],
+    ],
   },
 } as const;
 

@@ -65,16 +65,16 @@ export default function V3() {
         </div>
       </section>
 
-      {/* Features */}
+      {/* Módulos */}
       <section className="mx-auto w-full max-w-5xl px-6 py-24">
-        <div className="grid gap-10 sm:grid-cols-2">
-          {site.features.map((f) => (
-            <div key={f.title} className="flex gap-4">
-              <div className="text-4xl">{f.icon}</div>
-              <div>
-                <h3 className="text-xl font-bold">{f.title}</h3>
-                <p className="mt-2 text-neutral-700">{f.description}</p>
+        <div className="grid gap-10 sm:grid-cols-3">
+          {site.modules.items.map((m) => (
+            <div key={m.tag}>
+              <div className="text-sm font-bold uppercase tracking-widest text-amber-600">
+                {m.tag}
               </div>
+              <h3 className="mt-1 text-xl font-bold">{m.title}</h3>
+              <p className="mt-2 text-neutral-700">{m.description}</p>
             </div>
           ))}
         </div>
