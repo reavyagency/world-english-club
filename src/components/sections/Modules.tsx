@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/Card";
 import { Disclosure } from "@/components/ui/Accordion";
 import { RevealGroup, RevealItem, Reveal } from "@/components/ui/Reveal";
 
-/** Seção 5 — O que você recebe (3 módulos) + bônus Trip Tip + grade expansível. */
+/** Seção 5, O que você recebe (3 módulos) + bônus Trip Tip + grade expansível. */
 export function Modules() {
   const { modules } = site;
   return (

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 
-/** Seção 1 — Hero. Resultado comunicado em 3 segundos, apenas 2 CTAs. */
+/** Seção 1, Hero. Resultado comunicado em 3 segundos, apenas 2 CTAs. */
 export function Hero() {
   const { hero } = site;
   return (
@@ -25,7 +25,7 @@ export function Hero() {
 
           <Reveal delay={0.05}>
             <h1 className="mt-6 font-display text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
-              Fale inglês com confiança — do zero ao{" "}
+              Fale inglês com confiança, do zero ao{" "}
               <span className="text-gradient-brand">intermediário (A1 → B1)</span>.
             </h1>
           </Reveal>

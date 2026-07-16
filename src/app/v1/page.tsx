@@ -13,7 +13,7 @@ import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
 
 /**
- * VERSÃO 1 — Landing premium (layout de referência).
+ * VERSÃO 1, Landing premium (layout de referência).
  *
  * As 11 seções + header + footer, na ordem especificada. A copy vem de
  * `src/content/site.ts`; cores/assets/URLs em `globals.css` + `config/brand.ts`.

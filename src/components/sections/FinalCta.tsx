@@ -4,7 +4,7 @@ import { brand } from "@/config/brand";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 
-/** Seção 11 — Fechamento. Urgência leve e honesta ("ainda hoje"), sem contador fake. */
+/** Seção 11, Fechamento. Urgência leve e honesta ("ainda hoje"), sem contador fake. */
 export function FinalCta() {
   const { finalCta } = site;
   return (

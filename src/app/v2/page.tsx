@@ -13,7 +13,7 @@ import { FinalCta } from "@/components/sections/v2/FinalCta";
 import { Footer } from "@/components/sections/v2/Footer";
 
 /**
- * VERSÃO 2 — Landing premium "Editorial split / dark teal".
+ * VERSÃO 2, Landing premium "Editorial split / dark teal".
  *
  * Mesmas 11 seções + header + footer e a MESMA copy da v1 (fonte única:
  * `src/content/site.ts`), com linguagem de layout distinta: assimétrica,

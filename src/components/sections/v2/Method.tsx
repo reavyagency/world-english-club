@@ -11,18 +11,19 @@ const icons: Record<string, LucideIcon> = {
 };
 
 /**
- * V2 — Método em 3 passos. Ledger vertical numerado (não grid de cards):
+ * V2, Método em 3 passos. Ledger vertical numerado (não grid de cards):
  * número gigante à esquerda, conteúdo à direita, separados por linhas 1px.
  */
 export function Method() {
   const { method } = site;
   return (
-    <Section id={method.id}>
+    <Section id={method.id} className="bg-[#F6F3EB]">
       <EditorialHeading
         number="02"
         eyebrow="Método WEC"
         title={method.title}
         subtitle={method.subtitle}
+        tone="light"
       />
 
       <RevealGroup className="mt-4">
@@ -30,20 +31,20 @@ export function Method() {
           const Icon = icons[step.icon] ?? Blocks;
           return (
             <RevealItem key={step.number}>
-              <div className="group grid items-start gap-5 border-b border-line py-9 transition-colors hover:bg-surface/30 sm:grid-cols-[auto_1fr] sm:gap-10">
+              <div className="group grid items-start gap-5 border-b border-neutral-900/10 py-9 transition-colors hover:bg-white/70 sm:grid-cols-[auto_1fr] sm:gap-10">
                 <div className="flex items-center gap-5">
-                  <span className="font-display text-5xl font-bold tabular-nums text-line transition-colors group-hover:text-emerald-400/40 sm:text-6xl">
+                  <span className="font-display text-5xl font-bold tabular-nums text-neutral-900/15 transition-colors group-hover:text-gold/60 sm:text-6xl">
                     {String(step.number).padStart(2, "0")}
                   </span>
-                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl border border-emerald-400/25 bg-emerald-400/10 text-accent">
+                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl border border-gold/25 bg-gold/10 text-gold-2">
                     <Icon size={22} aria-hidden />
                   </span>
                 </div>
                 <div className="sm:pt-2">
-                  <h3 className="font-display text-xl font-semibold sm:text-2xl">
+                  <h3 className="font-display text-xl font-semibold text-neutral-900 sm:text-2xl">
                     {step.title}
                   </h3>
-                  <p className="mt-2 max-w-2xl text-muted">{step.description}</p>
+                  <p className="mt-2 max-w-2xl text-neutral-600">{step.description}</p>
                 </div>
               </div>
             </RevealItem>
@@ -54,7 +55,7 @@ export function Method() {
       <Reveal delay={0.1} className="mt-10">
         <a
           href={method.cta.href}
-          className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 px-7 py-3.5 text-base font-semibold text-[#04120e] shadow-[0_10px_40px_-8px_rgba(16,185,129,0.55)] transition-all hover:shadow-[0_14px_50px_-6px_rgba(16,185,129,0.7)] active:scale-[0.98]"
+          className="group inline-flex items-center gap-2 rounded-full bg-linear-to-r from-gold to-gold-2 px-7 py-3.5 text-base font-semibold text-neutral-950 shadow-[0_10px_40px_-8px_rgba(198,154,60,0.5)] transition-all hover:shadow-[0_14px_50px_-6px_rgba(198,154,60,0.65)] active:scale-[0.98]"
         >
           {method.cta.label}
           <ArrowRight size={18} className="transition-transform group-hover:translate-x-0.5" />

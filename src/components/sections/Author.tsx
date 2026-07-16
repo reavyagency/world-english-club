@@ -4,7 +4,7 @@ import { Section } from "@/components/ui/Section";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import { Reveal } from "@/components/ui/Reveal";
 
-/** Seção 8 — Autoridade: quem é John Silva. */
+/** Seção 8, Autoridade: quem é John Silva. */
 export function Author() {
   const { author } = site;
   return (
@@ -13,7 +13,7 @@ export function Author() {
         {/* [[FOTO John Silva]] */}
         <Reveal className="relative">
           <div className="absolute -inset-3 -z-10 rounded-[28px] bg-gradient-to-tr from-brand/20 to-brand-2/10 blur-2xl" aria-hidden />
-          <MediaPlaceholder caption="Foto — John Silva" aspect="4/5" icon={User} />
+          <MediaPlaceholder caption="Foto, John Silva" aspect="4/5" icon={User} />
         </Reveal>
 
         <div>
@@ -35,7 +35,7 @@ export function Author() {
           ))}
           <Reveal delay={0.2}>
             <p className="mt-6 font-display text-lg font-semibold">
-              — {author.name}
+              {author.name}
             </p>
           </Reveal>
         </div>

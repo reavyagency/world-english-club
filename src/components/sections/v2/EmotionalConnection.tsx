@@ -4,7 +4,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionKicker } from "./_shared";
 
 /**
- * V2 — Conexão emocional. Split editorial: pergunta grande à esquerda,
+ * V2, Conexão emocional. Split editorial: pergunta grande à esquerda,
  * corpo deslocado à direita. Acolhe, nunca envergonha.
  */
 export function EmotionalConnection() {

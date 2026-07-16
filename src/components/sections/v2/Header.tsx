@@ -3,10 +3,11 @@
 import { useEffect, useState } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { site } from "@/content/site";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 
 /**
- * V2 — Header minimalista (barra fina). Wordmark à esquerda, nav central
- * discreta, CTA em pílula com contorno teal. Ganha blur + borda ao rolar.
+ * V2, Header minimalista (barra fina). Wordmark à esquerda, nav central
+ * discreta, CTA em pílula com contorno dourado. Ganha blur + borda ao rolar.
  */
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -28,19 +29,9 @@ export function Header() {
       }`}
     >
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
-        {/* [[LOGO]] — wordmark textual até o SVG real */}
-        <a
-          href="#top"
-          className="flex items-center gap-2.5 font-display text-[0.95rem] font-bold tracking-tight"
-        >
-          <span className="grid h-6 w-6 place-items-center rounded-md border border-emerald-400/40 bg-emerald-400/10 text-xs text-accent">
-            W
-          </span>
-          <span>{site.brand.shortName}</span>
-          <span className="hidden text-muted sm:inline">·</span>
-          <span className="hidden text-sm font-medium text-muted sm:inline">
-            {site.brand.name}
-          </span>
+        {/* Logo */}
+        <a href="#top" className="flex items-center" aria-label={site.brand.name}>
+          <BrandLogo variant="dark" className="h-7 w-auto" priority />
         </a>
 
         {/* Nav desktop */}
@@ -59,12 +50,12 @@ export function Header() {
         <div className="hidden md:block">
           <a
             href="#planos"
-            className="group inline-flex items-center gap-1.5 rounded-full border border-emerald-400/40 bg-emerald-400/5 px-4 py-1.5 text-[0.82rem] font-semibold text-ink transition-all hover:border-emerald-400/70 hover:bg-emerald-400/10"
+            className="group inline-flex items-center gap-1.5 rounded-full border border-gold/40 bg-gold/5 px-4 py-1.5 text-[0.82rem] font-semibold text-ink transition-all hover:border-gold/70 hover:bg-gold/10"
           >
             Começar
             <ArrowUpRight
               size={15}
-              className="text-accent transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              className="text-gold transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
             />
           </a>
         </div>
@@ -99,10 +90,10 @@ export function Header() {
               <a
                 href="#planos"
                 onClick={() => setMenuOpen(false)}
-                className="flex w-full items-center justify-center gap-1.5 rounded-full border border-emerald-400/40 bg-emerald-400/10 px-4 py-2.5 text-sm font-semibold text-ink"
+                className="flex w-full items-center justify-center gap-1.5 rounded-full border border-gold/40 bg-gold/10 px-4 py-2.5 text-sm font-semibold text-ink"
               >
                 Começar agora
-                <ArrowUpRight size={16} className="text-accent" />
+                <ArrowUpRight size={16} className="text-gold" />
               </a>
             </li>
           </ul>

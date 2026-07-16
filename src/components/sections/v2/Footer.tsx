@@ -1,28 +1,27 @@
 import { site } from "@/content/site";
 import { brand } from "@/config/brand";
+import { BrandLogo } from "@/components/ui/BrandLogo";
+import { SocialIcon } from "@/components/ui/SocialIcon";
 
 // Resolve href real dos canais sociais a partir do .env
 function socialHref(label: string) {
-  if (label.toLowerCase().includes("whats")) return brand.urls.whatsapp;
-  if (label.toLowerCase().includes("insta")) return brand.urls.instagram;
+  const l = label.toLowerCase();
+  if (l.includes("whats")) return brand.urls.whatsapp;
+  if (l.includes("insta")) return brand.urls.instagram;
+  if (l.includes("you")) return brand.urls.youtube;
   return "#";
 }
 
-/** V2 — Footer editorial: wordmark grande à esquerda, colunas à direita. */
+/** V2, Footer editorial: wordmark grande à esquerda, colunas à direita. */
 export function Footer() {
   const { footer } = site;
   return (
     <footer className="border-t border-line px-6 py-14">
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-10 sm:grid-cols-[1.4fr_1fr_1fr]">
-          {/* [[LOGO]] */}
+          {/* Logo */}
           <div className="max-w-sm">
-            <div className="flex items-center gap-2.5 font-display text-lg font-bold">
-              <span className="grid h-8 w-8 place-items-center rounded-lg border border-emerald-400/40 bg-emerald-400/10 text-sm text-accent">
-                W
-              </span>
-              {site.brand.name}
-            </div>
+            <BrandLogo variant="dark" className="h-10 w-auto" />
             <p className="mt-4 text-sm leading-relaxed text-muted">
               {site.brand.tagline}
             </p>
@@ -52,10 +51,16 @@ export function Footer() {
                 <li key={link.label}>
                   <a
                     href={socialHref(link.label)}
-                    className="transition-colors hover:text-ink"
+                    className="group inline-flex items-center gap-2.5 transition-colors hover:text-gold"
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={link.label}
                   >
+                    <SocialIcon
+                      label={link.label}
+                      size={18}
+                      className="text-muted transition-colors group-hover:text-gold"
+                    />
                     {link.label}
                   </a>
                 </li>

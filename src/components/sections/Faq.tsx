@@ -3,7 +3,7 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { Accordion } from "@/components/ui/Accordion";
 import { Reveal } from "@/components/ui/Reveal";
 
-/** Seção 10 — FAQ (quebra de objeções), acordeão acessível. */
+/** Seção 10, FAQ (quebra de objeções), acordeão acessível. */
 export function Faq() {
   const { faq } = site;
   return (

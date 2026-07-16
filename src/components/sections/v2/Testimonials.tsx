@@ -1,13 +1,13 @@
-import { Quote, User, PlayCircle } from "lucide-react";
 import { site } from "@/content/site";
 import { Section } from "@/components/ui/Section";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { VideoPlayer } from "@/components/ui/VideoPlayer";
 import { Reveal } from "@/components/ui/Reveal";
 import { EditorialHeading } from "./_shared";
 
 /**
- * V2 — Depoimentos em RAIL horizontal (scroll-snap). Textos são placeholders
- * `[[ ]]` — nunca inventar. Suporta depoimento em vídeo (poster reservado).
+ * V2, Depoimentos em vídeo. Cada item é um player limpo (igual ao do hero)
+ * com legenda: nome em destaque + role. Nomes/resultados são placeholders
+ * `[[ ]]` até termos os dados reais, nunca inventar.
  */
 export function Testimonials() {
   const { testimonials } = site;
@@ -22,39 +22,25 @@ export function Testimonials() {
 
       <Reveal delay={0.05}>
         <div
-          className="-mx-6 mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4 [scrollbar-width:thin]"
+          className="mt-10 grid gap-6 sm:grid-cols-2"
           role="list"
           aria-label="Depoimentos de alunos"
         >
-          {testimonials.items.map((t) => (
+          {testimonials.videos.map((t) => (
             <figure
               key={t.name}
               role="listitem"
-              className="flex w-[85%] shrink-0 snap-start flex-col rounded-2xl border border-line bg-surface p-7 transition-colors hover:border-emerald-400/40 sm:w-[380px]"
+              className="flex flex-col rounded-2xl border border-line bg-surface p-5 transition-colors hover:border-gold/40"
             >
-              {t.hasVideo ? (
-                <MediaPlaceholder
-                  caption="Depoimento em vídeo"
-                  aspect="16/9"
-                  icon={PlayCircle}
-                  className="mb-5"
-                />
-              ) : (
-                <Quote size={30} className="mb-4 text-emerald-400/70" aria-hidden />
-              )}
+              <VideoPlayer
+                videoId={t.youtubeId}
+                label="depoimento"
+                aspect="16 / 9"
+              />
 
-              <blockquote className="flex-1 text-[0.98rem] leading-relaxed text-ink/90">
-                {t.quote}
-              </blockquote>
-
-              <figcaption className="mt-6 flex items-center gap-3 border-t border-line pt-5">
-                <span className="grid h-11 w-11 place-items-center rounded-full border border-line bg-surface-2 text-muted">
-                  <User size={20} aria-hidden />
-                </span>
-                <span className="text-sm">
-                  <span className="block font-semibold text-ink">{t.name}</span>
-                  <span className="block text-muted">{t.role}</span>
-                </span>
+              <figcaption className="mt-5 border-t border-line pt-5 text-sm">
+                <span className="block font-semibold text-ink">{t.name}</span>
+                <span className="mt-0.5 block text-muted">{t.role}</span>
               </figcaption>
             </figure>
           ))}

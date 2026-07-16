@@ -4,10 +4,11 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { site } from "@/content/site";
 import { Button } from "@/components/ui/Button";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 
 /**
  * Header fixo (sticky). Ganha blur + borda e encolhe ao rolar.
- * [[LOGO]] — trocar o wordmark textual pelo SVG real quando chegar.
+ * [[LOGO]], trocar o wordmark textual pelo SVG real quando chegar.
  */
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -33,12 +34,9 @@ export function Header() {
           scrolled ? "py-3" : "py-5"
         }`}
       >
-        {/* [[LOGO]] */}
-        <a href="#top" className="flex items-center gap-2 font-display text-lg font-bold">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-brand to-brand-2 text-sm text-white">
-            W
-          </span>
-          <span>{site.brand.name}</span>
+        {/* Logo */}
+        <a href="#top" className="flex items-center" aria-label={site.brand.name}>
+          <BrandLogo variant="dark" className="h-9 w-auto" priority />
         </a>
 
         {/* Nav desktop */}

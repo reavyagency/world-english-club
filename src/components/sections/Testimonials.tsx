@@ -6,7 +6,7 @@ import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
 
 /**
- * Seção 7 — Depoimentos. Nunca inventar: os textos são placeholders `[[ ]]`.
+ * Seção 7, Depoimentos. Nunca inventar: os textos são placeholders `[[ ]]`.
  * Suporta depoimento em vídeo (poster reservado) além de texto.
  */
 export function Testimonials() {

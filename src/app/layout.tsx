@@ -19,7 +19,12 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL(brand.seo.url),
-  title: "World English Club — Inglês do zero ao intermediário (A1 → B1)",
+  icons: {
+    icon: [{ url: brand.assets.favicon, type: "image/webp" }],
+    shortcut: brand.assets.favicon,
+    apple: brand.assets.favicon,
+  },
+  title: "World English Club, Inglês do zero ao intermediário (A1 → B1)",
   description:
     "Curso de inglês online para brasileiros. Método claro, prática orientada e plano de estudos semana a semana. Do zero à conversação, sem promessas mágicas. 7 dias de garantia.",
   keywords: [
@@ -33,21 +38,21 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     siteName: brand.name,
-    title: "World English Club — Inglês do zero ao intermediário (A1 → B1)",
+    title: "World English Club, Inglês do zero ao intermediário (A1 → B1)",
     description:
       "Método claro, prática orientada e plano de estudos semana a semana. Do zero à conversação, sem promessas mágicas.",
     images: [{ url: brand.seo.ogImage, width: 1200, height: 630, alt: brand.name }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "World English Club — Inglês do zero ao intermediário (A1 → B1)",
+    title: "World English Club, Inglês do zero ao intermediário (A1 → B1)",
     description:
       "Do zero à conversação, sem promessas mágicas. Método, prática e garantia de 7 dias.",
     images: [brand.seo.ogImage],
   },
 };
 
-// Structured data (JSON-LD) — Course + Organization
+// Structured data (JSON-LD), Course + Organization
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -55,11 +60,11 @@ const jsonLd = {
       "@type": "Organization",
       name: brand.name,
       url: brand.seo.url,
-      description: "Curso de inglês online para brasileiros — do A1 ao B1.",
+      description: "Curso de inglês online para brasileiros, do A1 ao B1.",
     },
     {
       "@type": "Course",
-      name: "World English Club — Inglês A1 → B1",
+      name: "World English Club, Inglês A1 → B1",
       description:
         "Curso de inglês online do zero à conversação, com método em 3 passos, 3 módulos, 50+ aulas, PDFs, MP3s, quizzes e certificado.",
       provider: {

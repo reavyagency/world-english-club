@@ -6,8 +6,8 @@ import { Reveal } from "@/components/ui/Reveal";
 import { EditorialHeading } from "./_shared";
 
 /**
- * V2 — Módulos em RAIL horizontal (scroll-snap), não grid centralizado.
- * 3 módulos + card bônus Trip Tip destacado em teal + grade via Disclosure.
+ * V2, Módulos em RAIL horizontal (scroll-snap), não grid centralizado.
+ * 3 módulos + card bônus Trip Tip destacado em dourado + grade via Disclosure.
  */
 export function Modules() {
   const { modules } = site;
@@ -31,15 +31,15 @@ export function Modules() {
             <article
               key={mod.tag}
               role="listitem"
-              className="group relative flex w-[82%] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-line bg-surface p-7 transition-all hover:border-emerald-400/40 hover:shadow-[0_24px_60px_-30px_rgba(16,185,129,0.5)] sm:w-[360px]"
+              className="group relative flex w-[82%] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-line bg-surface p-7 transition-all hover:border-gold/40 hover:shadow-[0_24px_60px_-30px_rgba(230,193,90,0.45)] sm:w-[360px]"
             >
               <span
-                className="pointer-events-none absolute -right-3 -top-6 font-display text-8xl font-bold text-line/60 transition-colors group-hover:text-emerald-400/15"
+                className="pointer-events-none absolute -right-3 -top-6 font-display text-8xl font-bold text-line/60 transition-colors group-hover:text-gold/15"
                 aria-hidden
               >
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <span className="relative text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+              <span className="relative text-xs font-semibold uppercase tracking-[0.2em] text-gold">
                 {mod.tag}
               </span>
               <h3 className="relative mt-3 font-display text-xl font-semibold">
@@ -52,16 +52,16 @@ export function Modules() {
           {/* Card bônus Trip Tip */}
           <article
             role="listitem"
-            className="group relative flex w-[82%] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-emerald-400/40 p-7 sm:w-[360px]"
+            className="group relative flex w-[82%] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-gold/40 p-7 sm:w-[360px]"
             style={{
               backgroundImage:
-                "linear-gradient(160deg, rgba(16,185,129,0.14), rgba(34,211,238,0.06) 60%, transparent)",
+                "linear-gradient(160deg, rgba(230,193,90,0.16), rgba(198,154,60,0.06) 60%, transparent)",
             }}
           >
-            <span className="grid h-12 w-12 place-items-center rounded-xl bg-emerald-400/15 text-accent">
+            <span className="grid h-12 w-12 place-items-center rounded-xl bg-gold/15 text-gold">
               <Luggage size={24} aria-hidden />
             </span>
-            <span className="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+            <span className="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-gold">
               {modules.bonus.tag}
             </span>
             <h3 className="mt-2 font-display text-xl font-semibold">
@@ -73,12 +73,12 @@ export function Modules() {
       </Reveal>
 
       {/* Grade completa (progressive disclosure) */}
-      <Reveal delay={0.1} className="mt-8">
+      <Reveal delay={0.1} className="mt-8 [&_svg]:text-gold!">
         <Disclosure label={modules.gradeToggleLabel}>
           <ul className="mt-6 grid max-w-4xl gap-x-10 gap-y-3 sm:grid-cols-2">
             {modules.grade.map((lesson) => (
               <li key={lesson} className="flex items-start gap-2.5 text-muted">
-                <Check size={18} className="mt-0.5 shrink-0 text-emerald-400" />
+                <Check size={18} className="mt-0.5 shrink-0 text-gold" />
                 <span>{lesson}</span>
               </li>
             ))}

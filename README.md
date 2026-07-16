@@ -1,6 +1,6 @@
 # World English Club 🌍🗣️
 
-Landing page de conversão da escola de inglês **World English Club (WEC)** — curso online do zero à conversação (A1 → B1), sem promessas mágicas.
+Landing page de conversão da escola de inglês **World English Club (WEC)**, curso online do zero à conversação (A1 → B1), sem promessas mágicas.
 
 Construída para **3 versões de layout** servidas em `/v1`, `/v2` e `/v3`. As três compartilham **a mesma copy**; o que muda é apenas o **layout**.
 
@@ -25,9 +25,9 @@ npm run dev
 
 Abra:
 
-- http://localhost:3000 — índice/switcher entre as versões
-- http://localhost:3000/v1 — landing premium (referência)
-- http://localhost:3000/v2 · `/v3` — layouts alternativos
+- http://localhost:3000, índice/switcher entre as versões
+- http://localhost:3000/v1, landing premium (referência)
+- http://localhost:3000/v2 · `/v3`, layouts alternativos
 
 ## 🗂️ Estrutura
 
@@ -61,7 +61,7 @@ src/
 
 ### Placeholders a substituir
 
-A copy contém marcadores `[[ ... ]]` para **dados que precisam ser reais** (nº de alunos, nota, depoimentos, CNPJ). Nunca invente esses valores — substitua pelos reais. Assets ainda não fornecidos aparecem como placeholders elegantes (blocos com aspect-ratio correto), então a página fica apresentável mesmo sem os arquivos finais.
+A copy contém marcadores `[[ ... ]]` para **dados que precisam ser reais** (nº de alunos, nota, depoimentos, CNPJ). Nunca invente esses valores, substitua pelos reais. Assets ainda não fornecidos aparecem como placeholders elegantes (blocos com aspect-ratio correto), então a página fica apresentável mesmo sem os arquivos finais.
 
 ## ✅ Conformidade
 
@@ -81,4 +81,4 @@ A copy contém marcadores `[[ ... ]]` para **dados que precisam ser reais** (nº
 
 ## 🌐 Domínios (produção)
 
-Cada domínio apontará para uma versão (`/v1`, `/v2`, `/v3`) — via configuração da Vercel ou `middleware` do Next.js, a definir no deploy.
+Cada domínio apontará para uma versão (`/v1`, `/v2`, `/v3`), via configuração da Vercel ou `middleware` do Next.js, a definir no deploy.

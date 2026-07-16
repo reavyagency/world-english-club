@@ -1,5 +1,6 @@
 import { site } from "@/content/site";
 import { brand } from "@/config/brand";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 
 // Resolve href real dos canais sociais a partir do .env
 function socialHref(label: string) {
@@ -8,22 +9,17 @@ function socialHref(label: string) {
   return "#";
 }
 
-/** Footer — logo, links, redes, nota legal (CDC art. 49) e copyright. */
+/** Footer, logo, links, redes, nota legal (CDC art. 49) e copyright. */
 export function Footer() {
   const { footer } = site;
   return (
     <footer className="border-t border-line bg-surface/40 px-6 py-14">
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col justify-between gap-8 sm:flex-row">
-          {/* [[LOGO]] */}
+          {/* Logo */}
           <div className="max-w-xs">
-            <div className="flex items-center gap-2 font-display text-lg font-bold">
-              <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-brand to-brand-2 text-sm text-white">
-                W
-              </span>
-              {site.brand.name}
-            </div>
-            <p className="mt-3 text-sm text-muted">{site.brand.tagline}</p>
+            <BrandLogo variant="dark" className="h-10 w-auto" />
+            <p className="mt-4 text-sm text-muted">{site.brand.tagline}</p>
           </div>
 
           <div className="flex gap-16">

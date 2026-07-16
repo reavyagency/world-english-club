@@ -9,28 +9,28 @@ const sealIcons: Record<string, LucideIcon> = {
   smartphone: Smartphone,
 };
 
-/** V2 — Garantia. Painel emerald assimétrico: promessa à esquerda, selos à direita. */
+/** V2, Garantia. Painel dourado assimétrico: promessa à esquerda, selos à direita. */
 export function Guarantee() {
   const { guarantee } = site;
   return (
     <Section className="bg-surface/30">
       <Reveal>
         <div
-          className="relative overflow-hidden rounded-3xl border border-emerald-400/30 p-8 sm:p-12"
+          className="relative overflow-hidden rounded-3xl border border-gold/30 p-8 sm:p-12"
           style={{
             backgroundImage:
-              "linear-gradient(150deg, rgba(16,185,129,0.12), rgba(34,211,238,0.05) 55%, transparent)",
+              "linear-gradient(150deg, rgba(230,193,90,0.13), rgba(198,154,60,0.05) 55%, transparent)",
           }}
         >
           <div
             className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full blur-3xl"
             aria-hidden
-            style={{ background: "radial-gradient(circle, rgba(16,185,129,0.28), transparent 70%)" }}
+            style={{ background: "radial-gradient(circle, rgba(230,193,90,0.26), transparent 70%)" }}
           />
           <div className="relative grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
               <SectionKicker number="07" eyebrow="Garantia" className="mb-6" />
-              <span className="grid h-14 w-14 place-items-center rounded-2xl bg-emerald-400/15 text-emerald-400">
+              <span className="grid h-14 w-14 place-items-center rounded-2xl bg-gold/15 text-gold">
                 <ShieldCheck size={30} aria-hidden />
               </span>
               <h2 className="mt-6 font-display text-3xl font-bold leading-[1.1] tracking-tight text-balance sm:text-4xl">
@@ -49,7 +49,7 @@ export function Guarantee() {
                     key={seal.title}
                     className="flex items-center gap-4 rounded-2xl border border-line bg-surface/80 p-5 backdrop-blur"
                   >
-                    <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-surface-2 text-accent">
+                    <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-surface-2 text-gold">
                       <Icon size={22} aria-hidden />
                     </span>
                     <span>

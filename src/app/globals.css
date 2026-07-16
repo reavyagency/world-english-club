@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /*
- * Design tokens — World English Club
+ * Design tokens, World English Club
  * Dark premium. Troque --color-brand / --color-brand-2 / --color-accent
  * quando o brandbook real chegar. Tudo o resto se ajusta.
  */
@@ -16,6 +16,8 @@
   --color-brand-2: #8b5cf6; /* acento secundário p/ gradientes */
   --color-accent: #22d3ee; /* highlight tecnológico (ciano) */
   --color-success: #22c55e;
+  --color-gold: #e6c15a; /* dourado claro (próximo à logo) — acento da variação B */
+  --color-gold-2: #c69a3c; /* dourado mais profundo (gradientes / hover) */
 
   --font-display: var(--font-sora);
   --font-sans: var(--font-inter);
@@ -83,29 +85,57 @@ body {
 
 /* --- Tela de seleção de versões (índice) --- */
 
-/* Degradê azul-marinho → ciano médio em movimento lento */
+/* Degradê azul em movimento, pan em loop nos dois eixos */
 @keyframes wec-gradient-move {
   0% {
     background-position: 0% 50%;
   }
+  25% {
+    background-position: 50% 100%;
+  }
   50% {
     background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 0%;
   }
   100% {
     background-position: 0% 50%;
   }
 }
 
-/* Auroras (blobs desfocados) que derivam pela tela */
+/* Auroras (blobs desfocados) que derivam pela tela, três padrões distintos */
 @keyframes wec-aurora {
   0% {
-    transform: translate3d(-6%, -3%, 0) scale(1);
+    transform: translate3d(-8%, -4%, 0) scale(1);
   }
   50% {
-    transform: translate3d(6%, 4%, 0) scale(1.15);
+    transform: translate3d(10%, 6%, 0) scale(1.2);
   }
   100% {
-    transform: translate3d(-6%, -3%, 0) scale(1);
+    transform: translate3d(-8%, -4%, 0) scale(1);
+  }
+}
+@keyframes wec-aurora-b {
+  0% {
+    transform: translate3d(8%, 6%, 0) scale(1.1);
+  }
+  50% {
+    transform: translate3d(-10%, -8%, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(8%, 6%, 0) scale(1.1);
+  }
+}
+@keyframes wec-aurora-c {
+  0% {
+    transform: translate3d(0, 8%, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-12%, -6%, 0) scale(1.25);
+  }
+  100% {
+    transform: translate3d(0, 8%, 0) scale(1);
   }
 }
 
@@ -125,24 +155,43 @@ body {
 .wec-gradient {
   background: linear-gradient(
     120deg,
-    #050b1a 0%,
-    #0a1c3f 28%,
-    #0e3a5f 55%,
-    #0e7490 78%,
-    #0a1c3f 100%
+    #04070f 0%,
+    #071733 24%,
+    #0b2b63 46%,
+    #0e4c9e 64%,
+    #0a2a5e 82%,
+    #061024 100%
   );
-  background-size: 260% 260%;
-  animation: wec-gradient-move 24s ease-in-out infinite;
+  background-size: 280% 280%;
+  animation: wec-gradient-move 18s linear infinite;
+}
+
+/* Mapa-múndi PONTILHADO: grade de pontos mascarada pela silhueta dos continentes */
+.wec-dotmap {
+  background-image: radial-gradient(
+    circle,
+    rgba(150, 205, 255, 0.85) 0.9px,
+    transparent 1.8px
+  );
+  background-size: 8px 8px;
+  -webkit-mask: url("/brand/world-map-solid.svg") center / contain no-repeat;
+  mask: url("/brand/world-map-solid.svg") center / contain no-repeat;
 }
 
 .wec-aurora {
-  animation: wec-aurora 20s ease-in-out infinite;
+  animation: wec-aurora 18s ease-in-out infinite;
 }
 .wec-aurora-slow {
-  animation: wec-aurora 30s ease-in-out infinite reverse;
+  animation: wec-aurora 26s ease-in-out infinite reverse;
+}
+.wec-aurora-b {
+  animation: wec-aurora-b 22s ease-in-out infinite;
+}
+.wec-aurora-c {
+  animation: wec-aurora-c 30s ease-in-out infinite;
 }
 .wec-map {
-  animation: wec-map-drift 40s ease-in-out infinite;
+  animation: wec-map-drift 36s ease-in-out infinite;
 }
 
 /* Respeita quem prefere menos movimento */
@@ -156,5 +205,29 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  /*
+   * Exceção: o fundo ambiente da tela de seleção (degradê + auroras + mapa)
+   * é um movimento lento e discreto, solicitado explicitamente. Mantém-se
+   * animando mesmo com "reduzir movimento"; o restante do site respeita.
+   */
+  .wec-gradient {
+    animation: wec-gradient-move 18s linear infinite !important;
+  }
+  .wec-aurora {
+    animation: wec-aurora 18s ease-in-out infinite !important;
+  }
+  .wec-aurora-slow {
+    animation: wec-aurora 26s ease-in-out infinite reverse !important;
+  }
+  .wec-aurora-b {
+    animation: wec-aurora-b 22s ease-in-out infinite !important;
+  }
+  .wec-aurora-c {
+    animation: wec-aurora-c 30s ease-in-out infinite !important;
+  }
+  .wec-map {
+    animation: wec-map-drift 36s ease-in-out infinite !important;
   }
 }

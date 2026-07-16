@@ -2,7 +2,7 @@ import { site } from "@/content/site";
 import { StatCounter } from "@/components/ui/StatCounter";
 import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
 
-/** Seção 2 — Barra de credibilidade com números em count-up. */
+/** Seção 2, Barra de credibilidade com números em count-up. */
 export function CredibilityBar() {
   return (
     <section className="border-y border-line bg-surface/40 px-6 py-12">

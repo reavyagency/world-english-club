@@ -14,7 +14,7 @@ function checkoutFor(name: string) {
   return brand.urls.checkoutAutoestudo;
 }
 
-/** Seção 6 — Planos e preços (crítica). Total mensal sempre visível ao lado do R$/dia. */
+/** Seção 6, Planos e preços (crítica). Total mensal sempre visível ao lado do R$/dia. */
 export function Plans() {
   const { plans } = site;
   return (

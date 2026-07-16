@@ -8,7 +8,7 @@ const sealIcons: Record<string, LucideIcon> = {
   smartphone: Smartphone,
 };
 
-/** Seção 9 — Garantia (reversão total de risco). */
+/** Seção 9, Garantia (reversão total de risco). */
 export function Guarantee() {
   const { guarantee } = site;
   return (

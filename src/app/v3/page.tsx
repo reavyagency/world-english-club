@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * VERSÃO 3 — "Bold light / warm editorial".
+ * VERSÃO 3, "Bold light / warm editorial".
  *
  * Mesma copy da V1 (fonte única: src/content/site.ts), porém com uma
  * linguagem de layout distinta: tema claro e quente (off-white), tipografia
@@ -41,6 +41,7 @@ import { StatCounter } from "@/components/ui/StatCounter";
 import { Accordion, Disclosure } from "@/components/ui/Accordion";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 
 /* -------------------------------------------------------------------------- */
 /*  Paleta / tokens locais (tema claro quente)                                */
@@ -72,7 +73,7 @@ function Sticker({
   );
 }
 
-/** CTA primário — pílula escura (sempre → #planos). */
+/** CTA primário, pílula escura (sempre → #planos). */
 function PillDark({
   href,
   children,
@@ -102,7 +103,7 @@ function PillDark({
   );
 }
 
-/** CTA secundário — pílula clara com contorno grosso. */
+/** CTA secundário, pílula clara com contorno grosso. */
 function PillOutline({
   href,
   children,
@@ -156,13 +157,8 @@ function HeaderV3() {
   return (
     <header className="sticky top-0 z-50 border-b-2 border-neutral-900 bg-[#FAF7F2]/85 backdrop-blur-md">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-5 py-3.5 sm:px-8">
-        <a href="#top" className="flex items-center gap-2">
-          <span className="grid h-9 w-9 place-items-center rounded-xl border-2 border-neutral-900 bg-amber-400 font-display text-sm font-black text-neutral-900">
-            {site.brand.shortName}
-          </span>
-          <span className="font-display text-lg font-black leading-none tracking-tight text-neutral-900">
-            {site.brand.name}
-          </span>
+        <a href="#top" className="flex items-center" aria-label={site.brand.name}>
+          <BrandLogo variant="light" className="h-9 w-auto" priority />
         </a>
 
         <nav className="hidden md:block" aria-label="Navegação principal">
@@ -228,7 +224,7 @@ function HeaderV3() {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  1 — Hero                                                                   */
+/*  1, Hero                                                                   */
 /* -------------------------------------------------------------------------- */
 
 function Hero() {
@@ -342,7 +338,7 @@ function Hero() {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  2 — Barra de credibilidade (faixa escura, count-up)                       */
+/*  2, Barra de credibilidade (faixa escura, count-up)                       */
 /* -------------------------------------------------------------------------- */
 
 function CredibilityBar() {
@@ -375,7 +371,7 @@ function CredibilityBar() {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  3 — Conexão emocional                                                      */
+/*  3, Conexão emocional                                                      */
 /* -------------------------------------------------------------------------- */
 
 function EmotionalConnection() {
@@ -406,7 +402,7 @@ function EmotionalConnection() {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  4 — Método (3 passos)                                                       */
+/*  4, Método (3 passos)                                                       */
 /* -------------------------------------------------------------------------- */
 
 const methodIcons: Record<string, LucideIcon> = {
@@ -466,7 +462,7 @@ function Method() {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  5 — Módulos + bônus + grade                                                */
+/*  5, Módulos + bônus + grade                                                */
 /* -------------------------------------------------------------------------- */
 
 function Modules() {
@@ -510,7 +506,7 @@ function Modules() {
         ))}
       </RevealGroup>
 
-      {/* Bônus Trip Tip — faixa escura de destaque */}
+      {/* Bônus Trip Tip, faixa escura de destaque */}
       <Reveal delay={0.1}>
         <div
           className="mt-6 flex flex-col items-start gap-5 rounded-[1.75rem] border-2 border-neutral-900 p-7 sm:flex-row sm:items-center"
@@ -561,7 +557,7 @@ function Modules() {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  6 — Planos                                                                  */
+/*  6, Planos                                                                  */
 /* -------------------------------------------------------------------------- */
 
 function Plans() {
@@ -626,7 +622,7 @@ function Plans() {
                       : "bg-amber-100 text-amber-700"
                   }`}
                 >
-                  {plan.perDay} — {plan.price}
+                  {plan.perDay}, {plan.price}
                   {plan.period}
                 </p>
 
@@ -703,7 +699,7 @@ function Plans() {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  7 — Depoimentos                                                             */
+/*  7, Depoimentos                                                             */
 /* -------------------------------------------------------------------------- */
 
 function Testimonials() {
@@ -768,7 +764,7 @@ function Testimonials() {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  8 — Autor (John Silva)                                                      */
+/*  8, Autor (John Silva)                                                      */
 /* -------------------------------------------------------------------------- */
 
 function Author() {
@@ -782,7 +778,7 @@ function Author() {
         <Reveal className="relative">
           <div className="relative mx-auto max-w-sm rounded-[2rem] border-2 border-neutral-900 bg-[#FAF7F2] p-3 shadow-[10px_10px_0_0_#1B160F]">
             <MediaPlaceholder
-              caption="Foto — John Silva"
+              caption="Foto, John Silva"
               aspect="4/5"
               className="!rounded-[1.4rem]"
             />
@@ -813,7 +809,7 @@ function Author() {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  9 — Garantia                                                                */
+/*  9, Garantia                                                                */
 /* -------------------------------------------------------------------------- */
 
 const guaranteeIcons: Record<string, LucideIcon> = {
@@ -871,7 +867,7 @@ function Guarantee() {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  10 — FAQ (Accordion escuro como bloco âncora)                              */
+/*  10, FAQ (Accordion escuro como bloco âncora)                              */
 /* -------------------------------------------------------------------------- */
 
 function Faq() {
@@ -901,7 +897,7 @@ function Faq() {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  11 — CTA final (faixa escura)                                              */
+/*  11, CTA final (faixa escura)                                              */
 /* -------------------------------------------------------------------------- */
 
 function FinalCta() {
@@ -965,14 +961,7 @@ function FooterV3() {
       <div className="mx-auto w-full max-w-6xl">
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div className="max-w-sm">
-            <div className="flex items-center gap-2">
-              <span className="grid h-9 w-9 place-items-center rounded-xl border-2 border-neutral-900 bg-amber-400 font-display text-sm font-black text-neutral-900">
-                {site.brand.shortName}
-              </span>
-              <span className="font-display text-lg font-black text-neutral-900">
-                {site.brand.name}
-              </span>
-            </div>
+            <BrandLogo variant="light" className="h-10 w-auto" />
             <p className="mt-3 text-sm text-neutral-600">
               {site.brand.tagline}
             </p>

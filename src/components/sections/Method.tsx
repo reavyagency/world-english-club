@@ -11,7 +11,7 @@ const icons: Record<string, LucideIcon> = {
   repeat: Repeat,
 };
 
-/** Seção 4 — Método WEC em 3 passos numerados. */
+/** Seção 4, Método WEC em 3 passos numerados. */
 export function Method() {
   const { method } = site;
   return (

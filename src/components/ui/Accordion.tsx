@@ -64,7 +64,7 @@ export function Accordion({ items }: { items: readonly Item[] }) {
   );
 }
 
-/** Divulgação simples (um único toggle) — usado na "grade completa de aulas". */
+/** Divulgação simples (um único toggle), usado na "grade completa de aulas". */
 export function Disclosure({
   label,
   children,

@@ -3,7 +3,7 @@ import { site } from "@/content/site";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 
-/** Seção 3 — Conexão emocional (dor → aspiração). Acolhe, nunca envergonha. */
+/** Seção 3, Conexão emocional (dor → aspiração). Acolhe, nunca envergonha. */
 export function EmotionalConnection() {
   const { emotional } = site;
   return (
