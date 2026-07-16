@@ -19,11 +19,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL(brand.seo.url),
-  icons: {
-    icon: [{ url: brand.assets.favicon, type: "image/webp" }],
-    shortcut: brand.assets.favicon,
-    apple: brand.assets.favicon,
-  },
+  // Favicon: Next detecta automaticamente app/favicon.ico, app/icon.png e
+  // app/apple-icon.png (formatos universais, gerados a partir da logo).
   title: "World English Club, Inglês do zero ao intermediário (A1 → B1)",
   description:
     "Curso de inglês online para brasileiros. Método claro, prática orientada e plano de estudos semana a semana. Do zero à conversação, sem promessas mágicas. 7 dias de garantia.",
