@@ -81,6 +81,70 @@ body {
   border-radius: 4px;
 }
 
+/* --- Tela de seleção de versões (índice) --- */
+
+/* Degradê azul-marinho → ciano médio em movimento lento */
+@keyframes wec-gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Auroras (blobs desfocados) que derivam pela tela */
+@keyframes wec-aurora {
+  0% {
+    transform: translate3d(-6%, -3%, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(6%, 4%, 0) scale(1.15);
+  }
+  100% {
+    transform: translate3d(-6%, -3%, 0) scale(1);
+  }
+}
+
+/* Mapa-múndi com leve deriva horizontal */
+@keyframes wec-map-drift {
+  0% {
+    transform: translateX(-1.5%) scale(1.02);
+  }
+  50% {
+    transform: translateX(1.5%) scale(1.05);
+  }
+  100% {
+    transform: translateX(-1.5%) scale(1.02);
+  }
+}
+
+.wec-gradient {
+  background: linear-gradient(
+    120deg,
+    #050b1a 0%,
+    #0a1c3f 28%,
+    #0e3a5f 55%,
+    #0e7490 78%,
+    #0a1c3f 100%
+  );
+  background-size: 260% 260%;
+  animation: wec-gradient-move 24s ease-in-out infinite;
+}
+
+.wec-aurora {
+  animation: wec-aurora 20s ease-in-out infinite;
+}
+.wec-aurora-slow {
+  animation: wec-aurora 30s ease-in-out infinite reverse;
+}
+.wec-map {
+  animation: wec-map-drift 40s ease-in-out infinite;
+}
+
 /* Respeita quem prefere menos movimento */
 @media (prefers-reduced-motion: reduce) {
   html {
