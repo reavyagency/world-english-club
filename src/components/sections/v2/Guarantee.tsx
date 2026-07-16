@@ -1,42 +1,39 @@
 import { ShieldCheck, CalendarClock, Smartphone, type LucideIcon } from "lucide-react";
 import { site } from "@/content/site";
-import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
-import { SectionKicker } from "./_shared";
+import { V2Section, Kicker, H2, tone } from "./_ui";
 
 const sealIcons: Record<string, LucideIcon> = {
   "calendar-clock": CalendarClock,
   smartphone: Smartphone,
 };
 
-/** V2, Garantia. Painel dourado assimétrico: promessa à esquerda, selos à direita. */
+/**
+ * V2, Garantia — navy.
+ *
+ * Card isolado com filete dourado: a promessa de reversão de risco merece
+ * destaque, mas por contenção (borda + superfície), não por gradiente.
+ * Ícone em `success` — verde comunica "sem risco" melhor que ouro aqui.
+ */
 export function Guarantee() {
   const { guarantee } = site;
   return (
-    <Section className="bg-surface/30">
+    <V2Section tone="navy">
       <Reveal>
-        <div
-          className="relative overflow-hidden rounded-3xl border border-gold/30 p-8 sm:p-12"
-          style={{
-            backgroundImage:
-              "linear-gradient(150deg, rgba(230,193,90,0.13), rgba(198,154,60,0.05) 55%, transparent)",
-          }}
-        >
-          <div
-            className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full blur-3xl"
-            aria-hidden
-            style={{ background: "radial-gradient(circle, rgba(230,193,90,0.26), transparent 70%)" }}
-          />
-          <div className="relative grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        <div className="rounded-2xl border border-gold/40 bg-navy-800 p-8 sm:p-12">
+          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
-              <SectionKicker number="07" eyebrow="Garantia" className="mb-6" />
-              <span className="grid h-14 w-14 place-items-center rounded-2xl bg-gold/15 text-gold">
-                <ShieldCheck size={30} aria-hidden />
+              <Kicker tone="navy">Garantia</Kicker>
+
+              <span className="mt-6 grid h-14 w-14 place-items-center rounded-2xl bg-navy-700 text-success">
+                <ShieldCheck size={28} aria-hidden />
               </span>
-              <h2 className="mt-6 font-display text-3xl font-bold leading-[1.1] tracking-tight text-balance sm:text-4xl">
+
+              <H2 tone="navy" className="mt-6 text-balance">
                 {guarantee.title}
-              </h2>
-              <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted">
+              </H2>
+
+              <p className={`mt-4 max-w-xl text-lg leading-relaxed ${tone.navy.body}`}>
                 {guarantee.body}
               </p>
             </div>
@@ -47,14 +44,16 @@ export function Guarantee() {
                 return (
                   <div
                     key={seal.title}
-                    className="flex items-center gap-4 rounded-2xl border border-line bg-surface/80 p-5 backdrop-blur"
+                    className="flex items-center gap-4 rounded-2xl border border-hairline bg-navy-700 p-5"
                   >
-                    <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-surface-2 text-gold">
+                    <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-xl ${tone.navy.iconWrap}`}>
                       <Icon size={22} aria-hidden />
                     </span>
                     <span>
-                      <span className="block font-semibold">{seal.title}</span>
-                      <span className="block text-sm text-muted">
+                      <span className={`block font-semibold ${tone.navy.title}`}>
+                        {seal.title}
+                      </span>
+                      <span className={`block text-sm ${tone.navy.muted}`}>
                         {seal.description}
                       </span>
                     </span>
@@ -65,6 +64,6 @@ export function Guarantee() {
           </div>
         </div>
       </Reveal>
-    </Section>
+    </V2Section>
   );
 }

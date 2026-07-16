@@ -1,31 +1,32 @@
 import { site } from "@/content/site";
-import { StatCounter } from "@/components/ui/StatCounter";
 import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
+import { StatCounter } from "@/components/ui/StatCounter";
+import { tone } from "./_ui";
 
 /**
- * V2, Barra de credibilidade. Faixa editorial com números em count-up,
- * alinhados à esquerda e separados por linhas 1px (grade deslocada).
+ * V2, Barra de credibilidade (navy).
+ *
+ * Faixa fina entre o hero e o corpo da página: superfície um passo mais clara
+ * + hairline em cima e embaixo. Os números contam de 0 até o valor ao entrar
+ * na viewport, rápido (900ms) para dar vida sem virar espetáculo.
+ *
+ * `forceMotion`: a contagem foi pedida explicitamente, então roda mesmo com
+ * "reduzir movimento" ligado. É uma exceção consciente e restrita a esta faixa
+ * (v1/v3 seguem respeitando a preferência do sistema).
  */
+
+const COUNT_MS = 900;
+
 export function CredibilityBar() {
   return (
     <section
-      className="border-y border-neutral-900/10 bg-[#F6F3EB] px-6 py-10"
-      style={{
-        backgroundImage:
-          "linear-gradient(180deg, rgba(230,193,90,0.07), transparent 60%)",
-      }}
+      className={`border-y bg-navy-800 px-6 py-10 ${tone.navy.border}`}
       aria-label="Números da World English Club"
     >
-      <RevealGroup className="mx-auto grid max-w-6xl grid-cols-2 gap-px overflow-hidden rounded-2xl border border-neutral-900/10 bg-neutral-900/10 shadow-[0_18px_50px_-30px_rgba(0,0,0,0.4)] lg:grid-cols-4">
-        {site.credibility.items.map((item, i) => (
-          <RevealItem
-            key={item.label}
-            className="bg-white px-5 py-6 sm:px-7 sm:py-7"
-          >
-            <span className="font-mono text-xs tabular-nums text-gold-2">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <div className="mt-2 font-display text-3xl font-bold leading-none text-neutral-900 sm:text-4xl">
+      <RevealGroup className="mx-auto grid max-w-6xl gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {site.credibility.items.map((item) => (
+          <RevealItem key={item.label}>
+            <p className="font-display text-3xl font-bold leading-none tracking-[-0.02em] text-gold sm:text-4xl">
               <StatCounter
                 value={item.value}
                 prefix={item.prefix}
@@ -33,9 +34,11 @@ export function CredibilityBar() {
                 displayOverride={
                   "displayOverride" in item ? item.displayOverride : undefined
                 }
+                duration={COUNT_MS}
+                forceMotion
               />
-            </div>
-            <p className="mt-2 text-[0.8rem] leading-snug text-neutral-600">
+            </p>
+            <p className={`mt-2.5 text-sm leading-snug ${tone.navy.muted}`}>
               {item.label}
             </p>
           </RevealItem>

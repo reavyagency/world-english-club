@@ -16,11 +16,26 @@
   --color-brand-2: #8b5cf6; /* acento secundário p/ gradientes */
   --color-accent: #22d3ee; /* highlight tecnológico (ciano) */
   --color-success: #22c55e;
-  --color-gold: #e6c15a; /* dourado claro (próximo à logo) — acento da variação B */
-  --color-gold-2: #c69a3c; /* dourado mais profundo (gradientes / hover) */
+
+  /* --- Paleta da variação B (/v2): navy + dourado ---
+   * Contraste verificado (WCAG). REGRA DE OURO: dourado só é TEXTO sobre navy
+   * (8,7:1). Sobre fundo claro o dourado dá 2,1:1 — proibido como texto,
+   * apenas filete/ícone. Em seção ivory, título = navy.
+   */
+  --color-navy-900: #0a1428; /* fundo base */
+  --color-navy-800: #0f1d3a; /* superfície / card */
+  --color-navy-700: #16294f; /* superfície elevada */
+  --color-hairline: #1e3a5f; /* borda (decorativo, não texto) */
+  --color-ivory: #f7f5f0; /* seções claras de respiro */
+  --color-gold: #d4af37; /* dourado clássico: texto/CTA SOBRE NAVY (8,7:1) */
+  --color-gold-light: #e3c15f; /* dourado claro sobre navy (10,5:1) */
+  --color-gold-deep: #b8860b; /* só ícone/filete em fundo claro (3,2:1) */
+  --color-gold-sheen: #f5e19a; /* brilho do dourado metálico (referência: a logo) */
+  --color-gold-2: #c69a3c; /* legado (transição) */
 
   --font-display: var(--font-sora);
   --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains);
 }
 
 :root {
@@ -81,6 +96,53 @@ body {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
   border-radius: 4px;
+}
+
+/* --- Variação B (/v2): dourado METÁLICO (referência: a logo) ---
+ * A logo escurece nas pontas e tem um brilho no meio; o dourado chapado perde
+ * isso. O degradê recria a leitura de metal — mas PLANO, sem bisel, sem brilho
+ * artificial e sem sombra pesada (é isso que faz um botão dourado parecer 2009).
+ * Contraste: o tom mais escuro do degradê (gold-deep) dá 5,6:1 sobre navy, então
+ * segue legível como texto grande; e texto navy sobre qualquer parada do degradê
+ * também passa. Use SOMENTE sobre navy.
+ */
+.gold-metal-text {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-gold-deep) 0%,
+    var(--color-gold) 28%,
+    var(--color-gold-sheen) 48%,
+    var(--color-gold-light) 66%,
+    var(--color-gold-deep) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gold-metal {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-gold-deep) 0%,
+    var(--color-gold) 26%,
+    var(--color-gold-sheen) 50%,
+    var(--color-gold-light) 72%,
+    var(--color-gold-deep) 100%
+  );
+}
+
+/* --- Variação B (/v2): textura tecnológica ---
+ * Malha de PONTOS dourados (não grade quadriculada) com máscara radial:
+ * lê como "tech" sem poluir. Puramente decorativa.
+ */
+.tech-dots {
+  background-image: radial-gradient(
+    color-mix(in oklab, var(--color-gold) 30%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(65% 60% at 50% 35%, #000 0%, transparent 78%);
+  mask-image: radial-gradient(65% 60% at 50% 35%, #000 0%, transparent 78%);
 }
 
 /* --- Tela de seleção de versões (índice) --- */

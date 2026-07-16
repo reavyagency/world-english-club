@@ -1,8 +1,7 @@
 import { Blocks, BookOpen, Repeat, ArrowRight, type LucideIcon } from "lucide-react";
 import { site } from "@/content/site";
-import { Section } from "@/components/ui/Section";
 import { RevealGroup, RevealItem, Reveal } from "@/components/ui/Reveal";
-import { EditorialHeading } from "./_shared";
+import { V2Section, Kicker, H2, Lead, V2Card, CtaPrimary, tone } from "./_ui";
 
 const icons: Record<string, LucideIcon> = {
   blocks: Blocks,
@@ -11,56 +10,75 @@ const icons: Record<string, LucideIcon> = {
 };
 
 /**
- * V2, Método em 3 passos. Ledger vertical numerado (não grid de cards):
- * número gigante à esquerda, conteúdo à direita, separados por linhas 1px.
+ * V2, Método em 3 passos, seção de RESPIRO (ivory).
+ *
+ * Grid sem espaço morto em nenhum breakpoint: 1 coluna no mobile; em 2 colunas
+ * o último card preenche a linha inteira; em 3 colunas os passos ficam lado a
+ * lado. A leitura 1→2→3 é linear, que é o que a seção precisa comunicar.
+ * No claro, dourado NUNCA é texto, só o ícone (`gold-deep`).
  */
 export function Method() {
   const { method } = site;
   return (
-    <Section id={method.id} className="bg-[#F6F3EB]">
-      <EditorialHeading
-        number="02"
-        eyebrow="Método WEC"
-        title={method.title}
-        subtitle={method.subtitle}
-        tone="light"
-      />
+    <V2Section id={method.id} tone="ivory">
+      <Reveal>
+        <div className="max-w-2xl">
+          <Kicker tone="ivory">Método WEC</Kicker>
+          <H2 tone="ivory" className="mt-4 text-balance">
+            {method.title}
+          </H2>
+          <Lead tone="ivory" className="mt-4">
+            {method.subtitle}
+          </Lead>
+        </div>
+      </Reveal>
 
-      <RevealGroup className="mt-4">
-        {method.steps.map((step) => {
+      <RevealGroup className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {method.steps.map((step, i) => {
           const Icon = icons[step.icon] ?? Blocks;
+          // Em 2 colunas, o último card ocupa a linha toda (evita buraco ao lado).
+          const fillsRow = i === method.steps.length - 1;
           return (
-            <RevealItem key={step.number}>
-              <div className="group grid items-start gap-5 border-b border-neutral-900/10 py-9 transition-colors hover:bg-white/70 sm:grid-cols-[auto_1fr] sm:gap-10">
-                <div className="flex items-center gap-5">
-                  <span className="font-display text-5xl font-bold tabular-nums text-neutral-900/15 transition-colors group-hover:text-gold/60 sm:text-6xl">
+            <RevealItem
+              key={step.number}
+              className={`h-full ${fillsRow ? "sm:col-span-2 lg:col-span-1" : ""}`}
+            >
+              <V2Card tone="ivory" className="flex h-full flex-col p-8">
+                <div className="flex items-center justify-between gap-4">
+                  <span
+                    className={`font-display text-4xl font-bold tabular-nums leading-none tracking-[-0.03em] ${tone.ivory.title}`}
+                  >
                     {String(step.number).padStart(2, "0")}
                   </span>
-                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl border border-gold/25 bg-gold/10 text-gold-2">
-                    <Icon size={22} aria-hidden />
+                  <span
+                    className={`grid h-11 w-11 shrink-0 place-items-center rounded-xl ${tone.ivory.iconWrap}`}
+                  >
+                    <Icon size={20} aria-hidden />
                   </span>
                 </div>
-                <div className="sm:pt-2">
-                  <h3 className="font-display text-xl font-semibold text-neutral-900 sm:text-2xl">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 max-w-2xl text-neutral-600">{step.description}</p>
-                </div>
-              </div>
+                <span className={`mt-6 block h-px w-10 ${tone.ivory.rule}`} aria-hidden />
+                <h3
+                  className={`mt-5 font-display text-xl font-semibold ${tone.ivory.title}`}
+                >
+                  {step.title}
+                </h3>
+                <p className={`mt-3 max-w-2xl ${tone.ivory.body}`}>
+                  {step.description}
+                </p>
+              </V2Card>
             </RevealItem>
           );
         })}
       </RevealGroup>
 
-      <Reveal delay={0.1} className="mt-10">
-        <a
-          href={method.cta.href}
-          className="group inline-flex items-center gap-2 rounded-full bg-linear-to-r from-gold to-gold-2 px-7 py-3.5 text-base font-semibold text-neutral-950 shadow-[0_10px_40px_-8px_rgba(198,154,60,0.5)] transition-all hover:shadow-[0_14px_50px_-6px_rgba(198,154,60,0.65)] active:scale-[0.98]"
-        >
-          {method.cta.label}
-          <ArrowRight size={18} className="transition-transform group-hover:translate-x-0.5" />
-        </a>
+      <Reveal delay={0.1}>
+        <div className="mt-10">
+          <CtaPrimary href={method.cta.href} tone="ivory">
+            {method.cta.label}
+            <ArrowRight size={18} aria-hidden />
+          </CtaPrimary>
+        </div>
       </Reveal>
-    </Section>
+    </V2Section>
   );
 }

@@ -2,6 +2,7 @@ import { site } from "@/content/site";
 import { brand } from "@/config/brand";
 import { BrandLogo } from "@/components/ui/BrandLogo";
 import { SocialIcon } from "@/components/ui/SocialIcon";
+import { tone } from "./_ui";
 
 // Resolve href real dos canais sociais a partir do .env
 function socialHref(label: string) {
@@ -12,29 +13,28 @@ function socialHref(label: string) {
   return "#";
 }
 
-/** V2, Footer editorial: wordmark grande à esquerda, colunas à direita. */
+/** V2, Footer (navy): wordmark à esquerda, colunas de links à direita. */
 export function Footer() {
   const { footer } = site;
   return (
-    <footer className="border-t border-line px-6 py-14">
+    <footer className="border-t border-hairline bg-navy-900 px-6 py-14 text-white">
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-10 sm:grid-cols-[1.4fr_1fr_1fr]">
-          {/* Logo */}
           <div className="max-w-sm">
             <BrandLogo variant="dark" className="h-10 w-auto" />
-            <p className="mt-4 text-sm leading-relaxed text-muted">
+            <p className={`mt-4 text-sm leading-relaxed ${tone.navy.muted}`}>
               {site.brand.tagline}
             </p>
           </div>
 
           <nav>
-            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+            <h3 className={`text-xs font-semibold uppercase tracking-[0.2em] ${tone.navy.muted}`}>
               Links
             </h3>
-            <ul className="mt-4 space-y-2.5 text-sm text-muted">
+            <ul className={`mt-4 space-y-2.5 text-sm ${tone.navy.muted}`}>
               {footer.links.map((link) => (
                 <li key={link.label}>
-                  <a href={link.href} className="transition-colors hover:text-ink">
+                  <a href={link.href} className="transition-colors hover:text-white">
                     {link.label}
                   </a>
                 </li>
@@ -43,24 +43,20 @@ export function Footer() {
           </nav>
 
           <nav>
-            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+            <h3 className={`text-xs font-semibold uppercase tracking-[0.2em] ${tone.navy.muted}`}>
               Redes
             </h3>
-            <ul className="mt-4 space-y-2.5 text-sm text-muted">
+            <ul className={`mt-4 space-y-2.5 text-sm ${tone.navy.muted}`}>
               {footer.social.map((link) => (
                 <li key={link.label}>
                   <a
                     href={socialHref(link.label)}
-                    className="group inline-flex items-center gap-2.5 transition-colors hover:text-gold"
+                    className="inline-flex items-center gap-2.5 transition-colors hover:text-white"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={link.label}
                   >
-                    <SocialIcon
-                      label={link.label}
-                      size={18}
-                      className="text-muted transition-colors group-hover:text-gold"
-                    />
+                    <SocialIcon label={link.label} size={18} />
                     {link.label}
                   </a>
                 </li>
@@ -69,7 +65,7 @@ export function Footer() {
           </nav>
         </div>
 
-        <div className="mt-12 flex flex-col gap-2 border-t border-line pt-6 text-sm text-muted">
+        <div className="mt-12 flex flex-col gap-2 border-t border-hairline pt-6 text-sm text-slate-500">
           <p>{footer.legal}</p>
           <p>{footer.copyright}</p>
         </div>

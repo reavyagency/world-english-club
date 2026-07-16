@@ -6,7 +6,11 @@ import { useInView, useReducedMotion } from "framer-motion";
 /**
  * Número com contagem animada (count-up) ao entrar na viewport.
  * Se `displayOverride` existir (ex.: "Certificado"), mostra o texto direto.
- * Respeita `prefers-reduced-motion`.
+ *
+ * Por padrão respeita `prefers-reduced-motion` (mostra o valor final direto).
+ * `forceMotion` desliga esse respeito para este contador específico: é um
+ * opt-in usado onde a contagem foi pedida explicitamente (v2), mantendo o
+ * comportamento acessível como padrão no resto do projeto.
  */
 export function StatCounter({
   value,
@@ -14,16 +18,19 @@ export function StatCounter({
   suffix = "",
   displayOverride,
   duration = 1500,
+  forceMotion = false,
 }: {
   value: number;
   prefix?: string;
   suffix?: string;
   displayOverride?: string;
   duration?: number;
+  forceMotion?: boolean;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
-  const reduce = useReducedMotion();
+  const prefersReduced = useReducedMotion();
+  const reduce = forceMotion ? false : prefersReduced;
   const [display, setDisplay] = useState(0);
 
   useEffect(() => {

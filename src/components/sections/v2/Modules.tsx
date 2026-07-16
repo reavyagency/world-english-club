@@ -1,90 +1,94 @@
-import { Luggage, Check } from "lucide-react";
+import { Luggage, ArrowRight } from "lucide-react";
 import { site } from "@/content/site";
-import { Section } from "@/components/ui/Section";
-import { Disclosure } from "@/components/ui/Accordion";
-import { Reveal } from "@/components/ui/Reveal";
-import { EditorialHeading } from "./_shared";
+import { RevealGroup, RevealItem, Reveal } from "@/components/ui/Reveal";
+import { V2Section, Kicker, H2, Lead, V2Card, CtaSecondary, tone } from "./_ui";
 
 /**
- * V2, Módulos em RAIL horizontal (scroll-snap), não grid centralizado.
- * 3 módulos + card bônus Trip Tip destacado em dourado + grade via Disclosure.
+ * V2, O que você recebe (navy).
+ *
+ * 3 módulos em cards iguais + o bônus Trip Tip destacado por borda dourada
+ * (é um extra, não um quarto módulo — a borda diz isso sem precisar de texto).
+ * A grade completa (100+ itens) vive em /v2/grade: aqui fica só o convite, para
+ * a home não pagar o custo de rolagem de quem já está convencido.
  */
 export function Modules() {
-  const { modules } = site;
+  const { modules, curriculum } = site;
+  // Contagem derivada dos dados reais — nunca escrita à mão.
+  const lessonCount = curriculum.modules.reduce((acc, m) => acc + m.items.length, 0);
   return (
-    <Section id={modules.id} className="bg-surface/30">
-      <EditorialHeading
-        number="03"
-        eyebrow="Conteúdo"
-        title={modules.title}
-        subtitle={modules.subtitle}
-      />
-
-      {/* Rail horizontal */}
-      <Reveal delay={0.05}>
-        <div
-          className="-mx-6 mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4 [scrollbar-width:thin]"
-          role="list"
-          aria-label="Módulos do curso"
-        >
-          {modules.items.map((mod, i) => (
-            <article
-              key={mod.tag}
-              role="listitem"
-              className="group relative flex w-[82%] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-line bg-surface p-7 transition-all hover:border-gold/40 hover:shadow-[0_24px_60px_-30px_rgba(230,193,90,0.45)] sm:w-[360px]"
-            >
-              <span
-                className="pointer-events-none absolute -right-3 -top-6 font-display text-8xl font-bold text-line/60 transition-colors group-hover:text-gold/15"
-                aria-hidden
-              >
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <span className="relative text-xs font-semibold uppercase tracking-[0.2em] text-gold">
-                {mod.tag}
-              </span>
-              <h3 className="relative mt-3 font-display text-xl font-semibold">
-                {mod.title}
-              </h3>
-              <p className="relative mt-3 text-muted">{mod.description}</p>
-            </article>
-          ))}
-
-          {/* Card bônus Trip Tip */}
-          <article
-            role="listitem"
-            className="group relative flex w-[82%] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-gold/40 p-7 sm:w-[360px]"
-            style={{
-              backgroundImage:
-                "linear-gradient(160deg, rgba(230,193,90,0.16), rgba(198,154,60,0.06) 60%, transparent)",
-            }}
-          >
-            <span className="grid h-12 w-12 place-items-center rounded-xl bg-gold/15 text-gold">
-              <Luggage size={24} aria-hidden />
-            </span>
-            <span className="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-gold">
-              {modules.bonus.tag}
-            </span>
-            <h3 className="mt-2 font-display text-xl font-semibold">
-              {modules.bonus.title}
-            </h3>
-            <p className="mt-3 text-muted">{modules.bonus.description}</p>
-          </article>
+    <V2Section id={modules.id} tone="navy">
+      <Reveal>
+        <div className="max-w-2xl">
+          <Kicker tone="navy">Conteúdo</Kicker>
+          <H2 tone="navy" className="mt-4 text-balance">
+            {modules.title}
+          </H2>
+          <Lead tone="navy" className="mt-4">
+            {modules.subtitle}
+          </Lead>
         </div>
       </Reveal>
 
-      {/* Grade completa (progressive disclosure) */}
-      <Reveal delay={0.1} className="mt-8 [&_svg]:text-gold!">
-        <Disclosure label={modules.gradeToggleLabel}>
-          <ul className="mt-6 grid max-w-4xl gap-x-10 gap-y-3 sm:grid-cols-2">
-            {modules.grade.map((lesson) => (
-              <li key={lesson} className="flex items-start gap-2.5 text-muted">
-                <Check size={18} className="mt-0.5 shrink-0 text-gold" />
-                <span>{lesson}</span>
-              </li>
-            ))}
-          </ul>
-        </Disclosure>
+      <RevealGroup className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {modules.items.map((mod) => (
+          <RevealItem key={mod.tag} className="h-full">
+            <V2Card tone="navy" className="h-full p-7">
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+                {mod.tag}
+              </span>
+              <h3 className={`mt-3 font-display text-xl font-semibold ${tone.navy.title}`}>
+                {mod.title}
+              </h3>
+              <p className={`mt-3 ${tone.navy.body}`}>{mod.description}</p>
+            </V2Card>
+          </RevealItem>
+        ))}
+      </RevealGroup>
+
+      {/* Bônus Trip Tip — destacado por borda dourada */}
+      <Reveal delay={0.05}>
+        <V2Card tone="navy" highlight className="mt-6 p-7">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
+            <span
+              className={`grid h-12 w-12 shrink-0 place-items-center rounded-xl ${tone.navy.iconWrap}`}
+            >
+              <Luggage size={24} aria-hidden />
+            </span>
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+                {modules.bonus.tag}
+              </span>
+              <h3 className={`mt-2 font-display text-xl font-semibold ${tone.navy.title}`}>
+                {modules.bonus.title}
+              </h3>
+              <p className={`mt-3 max-w-2xl ${tone.navy.body}`}>
+                {modules.bonus.description}
+              </p>
+            </div>
+          </div>
+        </V2Card>
       </Reveal>
-    </Section>
+
+      {/* Grade completa — mora em /v2/grade */}
+      <Reveal delay={0.1}>
+        <div className="mt-10 flex flex-col gap-5 rounded-2xl border border-hairline bg-navy-800 p-7 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h3 className={`font-display text-lg font-semibold ${tone.navy.title}`}>
+              A grade completa, aula por aula
+            </h3>
+            <p className={`mt-1.5 ${tone.navy.body}`}>
+              <span className="font-mono text-gold">{lessonCount}</span> itens entre
+              os 3 módulos, mais{" "}
+              <span className="font-mono text-gold">{curriculum.texts.items.length}</span>{" "}
+              textos temáticos e o bônus Trip Tip.
+            </p>
+          </div>
+          <CtaSecondary href="/v2/grade" tone="navy" className="shrink-0">
+            {modules.gradeToggleLabel}
+            <ArrowRight size={18} aria-hidden />
+          </CtaSecondary>
+        </div>
+      </Reveal>
+    </V2Section>
   );
 }

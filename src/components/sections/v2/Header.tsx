@@ -1,17 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { site } from "@/content/site";
 import { BrandLogo } from "@/components/ui/BrandLogo";
 
 /**
- * V2, Header minimalista (barra fina). Wordmark à esquerda, nav central
- * discreta, CTA em pílula com contorno dourado. Ganha blur + borda ao rolar.
+ * V2, Header (navy).
+ *
+ * No topo é transparente (deixa o hero respirar) e ao rolar ganha superfície
+ * navy translúcida + hairline — a barra só aparece quando passa a ser útil.
+ * CTA compacto dourado com texto NAVY (nunca branco sobre dourado).
  */
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeHref, setActiveHref] = useState<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -20,80 +24,108 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Scroll-spy: marca em dourado o item da seção que está sendo lida.
+  useEffect(() => {
+    const targets = site.nav
+      .map((item) => document.querySelector(item.href))
+      .filter((el): el is Element => el !== null);
+    if (!targets.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Entre as seções visíveis, vence a que está mais perto do topo.
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible[0]?.target.id) setActiveHref(`#${visible[0].target.id}`);
+      },
+      // Faixa de leitura: ~topo abaixo do header até o meio da tela.
+      { rootMargin: "-20% 0px -55% 0px", threshold: 0 },
+    );
+
+    targets.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <header
       className={`sticky top-0 z-50 transition-colors duration-300 ${
-        scrolled
-          ? "border-b border-line bg-bg/75 backdrop-blur-xl"
+        scrolled || menuOpen
+          ? "border-b border-hairline bg-navy-900/85 backdrop-blur-xl"
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
-        {/* Logo */}
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <a href="#top" className="flex items-center" aria-label={site.brand.name}>
           <BrandLogo variant="dark" className="h-7 w-auto" priority />
         </a>
 
-        {/* Nav desktop */}
-        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 md:flex">
-          {site.nav.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="text-[0.82rem] font-medium text-muted transition-colors hover:text-ink"
-            >
-              {item.label}
-            </a>
-          ))}
+        <nav className="hidden items-center gap-8 md:flex" aria-label="Principal">
+          {site.nav.map((item) => {
+            const active = activeHref === item.href;
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                aria-current={active ? "location" : undefined}
+                className={`text-sm font-medium transition-colors hover:text-gold ${
+                  active ? "text-gold" : "text-slate-300"
+                }`}
+              >
+                {item.label}
+              </a>
+            );
+          })}
         </nav>
 
-        <div className="hidden md:block">
-          <a
-            href="#planos"
-            className="group inline-flex items-center gap-1.5 rounded-full border border-gold/40 bg-gold/5 px-4 py-1.5 text-[0.82rem] font-semibold text-ink transition-all hover:border-gold/70 hover:bg-gold/10"
-          >
-            Começar
-            <ArrowUpRight
-              size={15}
-              className="text-gold transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-            />
-          </a>
-        </div>
+        <a
+          href="#planos"
+          className="gold-metal hidden rounded-full px-5 py-2 text-sm font-semibold text-navy-900 transition-[filter] duration-200 hover:brightness-110 md:inline-flex"
+        >
+          Começar
+        </a>
 
-        {/* Toggle mobile */}
         <button
-          className="text-ink md:hidden"
+          type="button"
+          className="text-white md:hidden"
           aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((v) => !v)}
         >
-          {menuOpen ? <X size={22} /> : <Menu size={22} />}
+          {menuOpen ? <X size={22} aria-hidden /> : <Menu size={22} aria-hidden />}
         </button>
       </div>
 
-      {/* Menu mobile */}
       {menuOpen ? (
-        <nav className="border-t border-line bg-bg/95 px-6 py-4 backdrop-blur-xl md:hidden">
+        <nav
+          className="border-t border-hairline bg-navy-900 px-6 py-4 md:hidden"
+          aria-label="Principal (mobile)"
+        >
           <ul className="flex flex-col gap-1">
-            {site.nav.map((item) => (
-              <li key={item.href}>
-                <a
-                  href={item.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="block py-2 text-muted hover:text-ink"
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
+            {site.nav.map((item) => {
+              const active = activeHref === item.href;
+              return (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    onClick={() => setMenuOpen(false)}
+                    aria-current={active ? "location" : undefined}
+                    className={`block py-2.5 transition-colors hover:text-gold ${
+                      active ? "text-gold" : "text-slate-300"
+                    }`}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              );
+            })}
             <li className="pt-3">
               <a
                 href="#planos"
                 onClick={() => setMenuOpen(false)}
-                className="flex w-full items-center justify-center gap-1.5 rounded-full border border-gold/40 bg-gold/10 px-4 py-2.5 text-sm font-semibold text-ink"
+                className="gold-metal flex w-full items-center justify-center rounded-full px-5 py-3 text-sm font-semibold text-navy-900"
               >
                 Começar agora
-                <ArrowUpRight size={16} className="text-gold" />
               </a>
             </li>
           </ul>

@@ -715,6 +715,7 @@ function Testimonials() {
         <h2 className="mt-5 font-display text-3xl font-black leading-[1.05] tracking-tight text-neutral-900 sm:text-5xl">
           {testimonials.title}
         </h2>
+        <p className="mt-4 text-lg text-neutral-600">{testimonials.subtitle}</p>
       </Reveal>
 
       <RevealGroup className="mt-14 grid gap-6 md:grid-cols-2">
@@ -730,7 +731,19 @@ function Testimonials() {
                 />
               </div>
 
-              <div className="mt-5 flex items-center gap-3 px-1">
+              {/* Avaliação. No fundo claro, âmbar mais escuro para o selo ter
+                  contraste suficiente como elemento gráfico. */}
+              <div
+                className="mt-5 flex items-center gap-1 px-1 text-amber-500"
+                role="img"
+                aria-label="Avaliação: 5 de 5 estrelas"
+              >
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} size={16} className="fill-current" aria-hidden />
+                ))}
+              </div>
+
+              <div className="mt-4 flex items-center gap-3 px-1">
                 <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border-2 border-neutral-900 bg-amber-300 font-display text-base font-black text-neutral-900">
                   {t.name.replace(/[[\]]/g, "").charAt(0).toUpperCase() || "★"}
                 </span>

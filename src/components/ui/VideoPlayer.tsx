@@ -66,6 +66,10 @@ export function VideoPlayer({
       playerRef.current = new YT.Player(holderRef.current, {
         videoId,
         host: "https://www.youtube-nocookie.com",
+        // Sem isto o iframe nasce com o tamanho padrão (640x390) e "flutua"
+        // dentro da moldura em vez de preenchê-la.
+        width: "100%",
+        height: "100%",
         playerVars: {
           autoplay: 1,
           controls: 0,
@@ -78,10 +82,23 @@ export function VideoPlayer({
           start,
         },
         events: {
-          onReady: (e: { target: { playVideo: () => void } }) =>
-            e.target.playVideo(),
-          onStateChange: (e: { data: number }) =>
-            setPlaying(e.data === YT.PlayerState.PLAYING),
+          // `seekTo` antes do play ignora a posição que o YouTube guarda de
+          // sessões anteriores: o vídeo sempre abre do começo.
+          onReady: (e: {
+            target: { playVideo: () => void; seekTo: (s: number, allow: boolean) => void };
+          }) => {
+            e.target.seekTo(start, true);
+            e.target.playVideo();
+          },
+          onStateChange: (e: { data: number }) => {
+            setPlaying(e.data === YT.PlayerState.PLAYING);
+            // Ao terminar, rebobina e pausa: volta ao pôster, pronto para
+            // ser assistido de novo do início.
+            if (e.data === YT.PlayerState.ENDED) {
+              playerRef.current?.seekTo(start, true);
+              playerRef.current?.pauseVideo();
+            }
+          },
         },
       });
     });
@@ -103,21 +120,31 @@ export function VideoPlayer({
     }
     const player = playerRef.current;
     if (!player) return;
-    if (playing) player.pauseVideo();
-    else player.playVideo();
-  }, [active, playing]);
+    if (playing) {
+      player.pauseVideo();
+    } else {
+      // SEMPRE reinicia. Sem barra de progresso não há como voltar ao começo,
+      // e com o vídeo pausado o pôster (thumbnail) cobre a tela — retomar do
+      // meio contradiria o que a pessoa está vendo.
+      player.seekTo(start, true);
+      player.playVideo();
+    }
+  }, [active, playing, start]);
 
   return (
     <div
       className={`group relative overflow-hidden rounded-2xl bg-black ${className}`}
       style={{ aspectRatio: aspect }}
     >
-      {/* Player (criado só após o primeiro play) */}
+      {/* Player (criado só após o primeiro play).
+          A API do YouTube SUBSTITUI o elemento alvo pelo iframe, então o alvo
+          precisa ficar aninhado: o iframe vira filho deste wrapper e herda o
+          estilo daqui. Se estilizássemos o próprio alvo, o estilo iria embora
+          junto com ele e o vídeo não preencheria a moldura. */}
       {active ? (
-        <div
-          ref={holderRef}
-          className="pointer-events-none absolute inset-0 [&>iframe]:h-full [&>iframe]:w-full"
-        />
+        <div className="pointer-events-none absolute inset-0 [&>iframe]:absolute [&>iframe]:inset-0 [&>iframe]:block [&>iframe]:h-full [&>iframe]:w-full">
+          <div ref={holderRef} />
+        </div>
       ) : null}
 
       {/* Thumbnail enquanto o vídeo não está tocando */}

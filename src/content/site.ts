@@ -158,6 +158,185 @@ export const site = {
     ],
   },
 
+  /**
+   * GRADE COMPLETA (conteúdo real do curso, vindo do site atual da WEC).
+   * Vive na página /v2/grade para manter a home enxuta.
+   *
+   * Modelo: cada item é um tópico; `extras` agrupa as práticas/exercícios que
+   * pertencem àquela aula (no site antigo eles eram linhas soltas, o que virava
+   * uma lista interminável). `kind` classifica o tipo para o leitor escanear.
+   */
+  curriculum: {
+    id: "grade",
+    eyebrow: "Grade completa",
+    title: "Aula por aula, do alfabeto à fluência.",
+    subtitle:
+      "Tudo o que está incluído nos 3 módulos, mais os textos temáticos e o bônus de viagem.",
+    modules: [
+      {
+        tag: "Módulo 1",
+        title: "Fundamentos e Estrutura",
+        summary:
+          "A estrutura da língua, com exercícios desde a primeira aula.",
+        items: [
+          { title: "Alphabet" },
+          { n: "1", title: "Hello", extras: ["Exercícios"] },
+          { n: "2", title: "How Are You", extras: ["Exercícios"] },
+          { title: "Vocabulary 1", kind: "vocabulario" },
+          { n: "3", title: "To Be Verb", extras: ["Exercícios"] },
+          {
+            n: "4",
+            title: "Present Tense",
+            extras: ["Prática: To Be + Present", "Exercícios"],
+          },
+          { title: "Vocabulary 2", kind: "vocabulario" },
+          {
+            n: "5",
+            title: "My, Our, Your, His, Her, Their",
+            extras: ["Exercícios", "Prática"],
+          },
+          { n: "6", title: "Negative Form", extras: ["Prática", "Exercícios"] },
+          { title: "Vocabulary 3", kind: "vocabulario" },
+          {
+            n: "7",
+            title: "This, That, These, Those",
+            extras: ["Prática", "Exercícios"],
+          },
+          { n: "8", title: "Interrogative", extras: ["Prática", "Exercícios"] },
+          { n: "9", title: "Past Tense", extras: ["Parte 2"] },
+          {
+            n: "10",
+            title: "Do, Does, Did",
+            extras: ["Prática: Past + Do/Does/Did", "Exercícios"],
+          },
+          { title: "Vocabulary 4", kind: "vocabulario" },
+          {
+            n: "11",
+            title: "Who, What, Which, Where, How",
+            extras: ["Prática", "Exercícios"],
+          },
+          { n: "12", title: "In, On, At", extras: ["Prática", "Exercícios"] },
+          { title: "Vocabulary 5", kind: "vocabulario" },
+          { n: "13", title: "Future", extras: ["Prática"] },
+          { n: "14", title: "Numbers and Age" },
+          { n: "15", title: "Progressive Tense", extras: ["Prática"] },
+          { n: "16", title: "1000 Words in 10 Minutes", kind: "palavras" },
+          { title: "Resumão" },
+        ],
+      },
+      {
+        tag: "Módulo 2",
+        title: "Vocabulário e Situações",
+        summary:
+          "Temas reais e úteis, com textos de leitura e as 1.000 palavras em blocos.",
+        items: [
+          { title: "Meeting" },
+          { title: "Week Days" },
+          { title: "First Meeting", kind: "texto" },
+          { title: "1000 Common Words · 1 a 50", kind: "palavras" },
+          { title: "Profession" },
+          { title: "Er and Est" },
+          { title: "Kitchen" },
+          { title: "A Week In a Conversation", kind: "texto" },
+          { title: "City" },
+          { title: "How Many, How Much, How Long" },
+          { title: "1000 Common Words · 51 a 100", kind: "palavras" },
+          { title: "May and Can" },
+          { title: "My House" },
+          { title: "Like and As" },
+          { title: "Daily Life And Conversation", kind: "texto" },
+          { title: "1000 Common Words · 101 a 150", kind: "palavras" },
+          { title: "Months" },
+          { title: "Fruits" },
+          { title: "Food" },
+          { title: "Make, Bake and Do" },
+          { title: "Cooking and Seasons", kind: "texto" },
+          { title: "1000 Common Words · 151 a 200", kind: "palavras" },
+          { title: "Animals" },
+          { title: "Hour" },
+          { title: "1000 Common Words · 201 a 250", kind: "palavras" },
+          { title: "Ordinal Numbers" },
+          { title: "Universe" },
+          { title: "Location" },
+          { title: "Finding Your Way", kind: "texto" },
+        ],
+      },
+      {
+        tag: "Módulo 3",
+        title: "Consolidação e Fluência",
+        summary:
+          "Phrasal verbs, expressões e temas avançados até as 500 palavras finais.",
+        items: [
+          { title: "Stock Market" },
+          { title: "1000 Common Words · 251 a 300", kind: "palavras" },
+          { title: "Transition Words" },
+          { title: "Calling" },
+          { title: "Expressions 1" },
+          { title: "1000 Common Words · 300 a 350", kind: "palavras" },
+          { title: "Bedroom" },
+          { title: "Human Body" },
+          { title: "Seasons" },
+          { title: "Expressions 2" },
+          { title: "Taxi Driver" },
+          { title: "1000 Common Words · 350 a 400", kind: "palavras" },
+          { title: "Phrasal Verbs" },
+          { title: "Business" },
+          { title: "Technology" },
+          { title: "1000 Common Words · 400 a 450", kind: "palavras" },
+          { title: "Internet" },
+          { title: "1000 Common Words · 450 a 500", kind: "palavras" },
+        ],
+      },
+    ],
+    texts: {
+      tag: "Textos",
+      title: "Textos temáticos",
+      summary: "Leitura e interpretação, do simples ao avançado.",
+      items: [
+        "The Golden Key",
+        "A Beautiful Day",
+        "A Rainy Day Adventure",
+        "A Snowy Day Adventure",
+        "A Beach Adventure",
+        "A Day At The Farm",
+        "A Day At The Zoo",
+        "A Peaceful Morning Routine",
+        "Embracing The Power Of Words",
+        "The Journey Through Education",
+        "Discovering Nature's Marvels",
+        "The Art Of Mindful Living",
+        "The Influence Of Social Media",
+        "Pursuing Goals and Personal Growth",
+        "The Power of Music",
+        "Living a Healthy Lifestyle",
+        "Reflections on Time and Memory",
+        "Artistic Expression and Creativity",
+        "Technology and Its Influence on Society",
+        "Cultural Differences and Global Tolerance",
+        "Sustainability and the Environment",
+        "Relationships and Emotional Well-Being",
+        "Financial Literacy and Personal Budgeting",
+        "Stress Management in Modern Life",
+        "The Importance of Community Engagement",
+        "Emotional Intelligence in Relationships and Work",
+        "The Evolving Definition of Success",
+      ],
+    },
+    tripTip: {
+      tag: "Bônus",
+      title: "Trip Tip",
+      summary: "Inglês de sobrevivência para viagem.",
+      items: [
+        "Airport",
+        "On the plane",
+        "Taxi",
+        "Hotel",
+        "Restaurant",
+        "Supermarket",
+      ],
+    },
+  },
+
   // Seção 6, Planos (mantém price/period/features/cta p/ v2/v3)
   plans: {
     id: "planos",
@@ -205,7 +384,8 @@ export const site = {
   // Seção 7, Depoimentos (SUBSTITUIR por reais)
   testimonials: {
     id: "depoimentos",
-    title: "Quem estuda com a WEC recomenda.",
+    title: "Enquanto as aulas acontecem, as satisfações vêm à tona.",
+    subtitle: "Veja o que os alunos falam sobre a World English Club.",
     // `items`: depoimentos em texto (placeholders) usados por v1 e v3.
     items: [
       {
@@ -228,16 +408,16 @@ export const site = {
         hasVideo: false,
       },
     ],
-    // `videos`: depoimentos em vídeo (player limpo). Usados APENAS pela v2.
+    // `videos`: depoimentos em vídeo (player limpo), usados nas 3 versões.
     videos: [
       {
-        name: "[[Nome do aluno 1]]",
-        role: "[[de onde saiu → aonde chegou]]",
+        name: "Laizza",
+        role: "Florianópolis/SC",
         youtubeId: "ea1lwwLwMuU",
       },
       {
-        name: "[[Nome do aluno 2]]",
-        role: "[[de onde saiu → aonde chegou]]",
+        name: "Magno",
+        role: "Florianópolis/SC",
         youtubeId: "5qtreobDCGU",
       },
     ],
