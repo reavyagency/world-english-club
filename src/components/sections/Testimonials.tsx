@@ -1,13 +1,10 @@
-import { Quote, User, PlayCircle } from "lucide-react";
 import { site } from "@/content/site";
 import { Section, SectionHeading } from "@/components/ui/Section";
-import { Card } from "@/components/ui/Card";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { VideoPlayer } from "@/components/ui/VideoPlayer";
 import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
 
 /**
- * Seção 7, Depoimentos. Nunca inventar: os textos são placeholders `[[ ]]`.
- * Suporta depoimento em vídeo (poster reservado) além de texto.
+ * Seção 7, Depoimentos em vídeo.
  */
 export function Testimonials() {
   const { testimonials } = site;
@@ -15,33 +12,17 @@ export function Testimonials() {
     <Section id={testimonials.id} className="bg-surface/30">
       <SectionHeading eyebrow="Depoimentos" title={testimonials.title} />
 
-      <RevealGroup className="mt-14 grid gap-6 md:grid-cols-3">
-        {testimonials.items.map((t) => (
+      <RevealGroup className="mt-14 grid gap-6 md:grid-cols-2">
+        {testimonials.videos.map((t) => (
           <RevealItem key={t.name} className="h-full">
-            <Card className="flex h-full flex-col">
-              {t.hasVideo ? (
-                <MediaPlaceholder
-                  caption="Depoimento em vídeo"
-                  aspect="16/9"
-                  icon={PlayCircle}
-                  className="mb-5"
-                />
-              ) : (
-                <Quote size={28} className="mb-4 text-brand" aria-hidden />
-              )}
+            <div className="flex h-full flex-col rounded-2xl border border-line bg-surface p-5">
+              <VideoPlayer videoId={t.youtubeId} label="depoimento" aspect="16 / 9" />
 
-              <blockquote className="flex-1 text-ink/90">{t.quote}</blockquote>
-
-              <figcaption className="mt-5 flex items-center gap-3">
-                <span className="grid h-11 w-11 place-items-center rounded-full border border-line bg-surface-2 text-muted">
-                  <User size={20} aria-hidden />
-                </span>
-                <span className="text-sm">
-                  <span className="block font-semibold text-ink">{t.name}</span>
-                  <span className="block text-muted">{t.role}</span>
-                </span>
+              <figcaption className="mt-5 text-sm">
+                <span className="block font-semibold text-ink">{t.name}</span>
+                <span className="block text-muted">{t.role}</span>
               </figcaption>
-            </Card>
+            </div>
           </RevealItem>
         ))}
       </RevealGroup>

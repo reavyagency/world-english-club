@@ -13,6 +13,7 @@
  * MediaPlaceholder, Reveal*) e o `brand` config para as URLs.
  */
 
+import Image from "next/image";
 import { useState, type ReactNode, type AnchorHTMLAttributes } from "react";
 import {
   Menu,
@@ -21,7 +22,6 @@ import {
   ArrowUpRight,
   Check,
   Star,
-  Play,
   Quote,
   Blocks,
   BookOpen,
@@ -39,9 +39,10 @@ import { site } from "@/content/site";
 import { brand } from "@/config/brand";
 import { StatCounter } from "@/components/ui/StatCounter";
 import { Accordion, Disclosure } from "@/components/ui/Accordion";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { VideoPlayer } from "@/components/ui/VideoPlayer";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { BrandLogo } from "@/components/ui/BrandLogo";
+import { SocialIcon } from "@/components/ui/SocialIcon";
 
 /* -------------------------------------------------------------------------- */
 /*  Paleta / tokens locais (tema claro quente)                                */
@@ -305,10 +306,11 @@ function Hero() {
         {/* Coluna mídia */}
         <Reveal delay={0.12} className="relative">
           <div className="relative rounded-[2rem] border-2 border-neutral-900 bg-white p-3 shadow-[12px_12px_0_0_#1B160F]">
-            <MediaPlaceholder
-              caption={hero.media.caption}
-              aspect={hero.media.aspect}
-              icon={Play}
+            <VideoPlayer
+              videoId={hero.media.youtubeId}
+              start={hero.media.start}
+              label="vídeo do produto"
+              aspect="16 / 9"
               className="!rounded-[1.4rem]"
             />
             <span className="absolute -left-3 -top-3 rotate-[-6deg]">
@@ -715,33 +717,20 @@ function Testimonials() {
         </h2>
       </Reveal>
 
-      <RevealGroup className="mt-14 grid gap-6 md:grid-cols-3">
-        {testimonials.items.map((t) => (
+      <RevealGroup className="mt-14 grid gap-6 md:grid-cols-2">
+        {testimonials.videos.map((t) => (
           <RevealItem key={t.name} className="h-full">
-            <article className="flex h-full flex-col rounded-[1.75rem] border-2 border-neutral-900 bg-white p-7">
-              {t.hasVideo ? (
-                <div className="mb-5 overflow-hidden rounded-2xl border-2 border-neutral-900">
-                  <MediaPlaceholder
-                    caption="Depoimento em vídeo"
-                    aspect="16/9"
-                    icon={Play}
-                    className="!rounded-none !border-0"
-                  />
-                </div>
-              ) : (
-                <Quote
-                  size={34}
-                  className="mb-4 text-amber-400"
-                  aria-hidden
-                  strokeWidth={2.5}
+            <article className="flex h-full flex-col rounded-[1.75rem] border-2 border-neutral-900 bg-white p-4 shadow-[10px_10px_0_0_#1B160F]">
+              <div className="overflow-hidden rounded-2xl border-2 border-neutral-900">
+                <VideoPlayer
+                  videoId={t.youtubeId}
+                  label="depoimento"
+                  aspect="16 / 9"
+                  className="!rounded-none"
                 />
-              )}
+              </div>
 
-              <p className="flex-1 text-lg font-medium leading-relaxed text-neutral-800">
-                {t.quote}
-              </p>
-
-              <div className="mt-6 flex items-center gap-3 border-t-2 border-neutral-900 pt-5">
+              <div className="mt-5 flex items-center gap-3 px-1">
                 <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border-2 border-neutral-900 bg-amber-300 font-display text-base font-black text-neutral-900">
                   {t.name.replace(/[[\]]/g, "").charAt(0).toUpperCase() || "★"}
                 </span>
@@ -749,11 +738,6 @@ function Testimonials() {
                   <p className="font-black text-neutral-900">{t.name}</p>
                   <p className="text-sm text-neutral-500">{t.role}</p>
                 </div>
-                {t.hasVideo ? (
-                  <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-brand px-2.5 py-1 text-[0.65rem] font-black uppercase tracking-wide text-white">
-                    <Play size={11} className="fill-white" aria-hidden /> Vídeo
-                  </span>
-                ) : null}
               </div>
             </article>
           </RevealItem>
@@ -777,11 +761,15 @@ function Author() {
       <div className="grid items-center gap-12 lg:grid-cols-[0.8fr_1.2fr]">
         <Reveal className="relative">
           <div className="relative mx-auto max-w-sm rounded-[2rem] border-2 border-neutral-900 bg-[#FAF7F2] p-3 shadow-[10px_10px_0_0_#1B160F]">
-            <MediaPlaceholder
-              caption="Foto, John Silva"
-              aspect="4/5"
-              className="!rounded-[1.4rem]"
-            />
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[1.4rem] border-2 border-neutral-900">
+              <Image
+                src={brand.assets.author}
+                alt="John Silva"
+                fill
+                sizes="(max-width:1024px) 100vw, 40vw"
+                className="object-cover"
+              />
+            </div>
           </div>
           <span className="absolute -bottom-3 left-1/2 -translate-x-1/2">
             <span className="inline-flex items-center gap-1.5 rounded-full border-2 border-neutral-900 bg-amber-400 px-4 py-2 font-display text-base font-black text-neutral-900">
@@ -991,15 +979,19 @@ function FooterV3() {
                       ? brand.urls.whatsapp
                       : key === "instagram"
                         ? brand.urls.instagram
-                        : l.href;
+                        : key === "youtube"
+                          ? brand.urls.youtube
+                          : l.href;
                   return (
                     <li key={l.label}>
                       <a
                         href={href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-sm font-semibold text-neutral-700 underline-offset-4 hover:text-neutral-900 hover:underline"
+                        aria-label={l.label}
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-neutral-700 underline-offset-4 hover:text-neutral-900 hover:underline"
                       >
+                        <SocialIcon label={l.label} size={16} />
                         {l.label}
                         <ArrowUpRight size={14} aria-hidden />
                       </a>

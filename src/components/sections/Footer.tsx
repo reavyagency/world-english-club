@@ -1,11 +1,14 @@
 import { site } from "@/content/site";
 import { brand } from "@/config/brand";
 import { BrandLogo } from "@/components/ui/BrandLogo";
+import { SocialIcon } from "@/components/ui/SocialIcon";
 
 // Resolve href real dos canais sociais a partir do .env
 function socialHref(label: string) {
-  if (label.toLowerCase().includes("whats")) return brand.urls.whatsapp;
-  if (label.toLowerCase().includes("insta")) return brand.urls.instagram;
+  const l = label.toLowerCase();
+  if (l.includes("whats")) return brand.urls.whatsapp;
+  if (l.includes("insta")) return brand.urls.instagram;
+  if (l.includes("you")) return brand.urls.youtube;
   return "#";
 }
 
@@ -42,10 +45,12 @@ export function Footer() {
                   <li key={link.label}>
                     <a
                       href={socialHref(link.label)}
-                      className="hover:text-ink"
+                      className="inline-flex items-center gap-2 hover:text-ink"
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={link.label}
                     >
+                      <SocialIcon label={link.label} size={18} />
                       {link.label}
                     </a>
                   </li>

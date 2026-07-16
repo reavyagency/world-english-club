@@ -1,7 +1,8 @@
-import { BadgeCheck, User } from "lucide-react";
+import Image from "next/image";
+import { BadgeCheck } from "lucide-react";
 import { site } from "@/content/site";
+import { brand } from "@/config/brand";
 import { Section } from "@/components/ui/Section";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import { Reveal } from "@/components/ui/Reveal";
 
 /** Seção 8, Autoridade: quem é John Silva. */
@@ -13,7 +14,9 @@ export function Author() {
         {/* [[FOTO John Silva]] */}
         <Reveal className="relative">
           <div className="absolute -inset-3 -z-10 rounded-[28px] bg-gradient-to-tr from-brand/20 to-brand-2/10 blur-2xl" aria-hidden />
-          <MediaPlaceholder caption="Foto, John Silva" aspect="4/5" icon={User} />
+          <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-line">
+            <Image src={brand.assets.author} alt="John Silva" fill sizes="(max-width:1024px) 100vw, 40vw" className="object-cover" />
+          </div>
         </Reveal>
 
         <div>

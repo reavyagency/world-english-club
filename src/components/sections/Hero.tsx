@@ -2,7 +2,7 @@ import { Star, Check, PlayCircle } from "lucide-react";
 import { site } from "@/content/site";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { VideoPlayer } from "@/components/ui/VideoPlayer";
 
 /** Seção 1, Hero. Resultado comunicado em 3 segundos, apenas 2 CTAs. */
 export function Hero() {
@@ -76,10 +76,12 @@ export function Hero() {
         {/* Mídia */}
         <Reveal delay={0.15} className="relative">
           <div className="absolute -inset-4 -z-10 rounded-[32px] bg-gradient-to-tr from-brand/20 via-brand-2/10 to-accent/20 blur-2xl" aria-hidden />
-          <MediaPlaceholder
-            caption={hero.media.caption}
-            aspect={hero.media.aspect}
-            icon={PlayCircle}
+          <VideoPlayer
+            videoId={site.hero.media.youtubeId}
+            start={site.hero.media.start}
+            label="vídeo do produto"
+            aspect="16 / 9"
+            className="shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)]"
           />
         </Reveal>
       </div>
