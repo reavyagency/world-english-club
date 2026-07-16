@@ -228,6 +228,27 @@ body {
   animation: wec-gradient-move 18s linear infinite;
 }
 
+/* Variante ESCURA do mesmo degradê, para uso atrás de texto (hero da v1).
+ * O `wec-gradient` foi desenhado para a tela de seleção, onde nada grande fica
+ * por cima; na hero, a parada mais clara dele (#0e4c9e) passava atrás da
+ * headline — que também é um degradê de azul — e a leitura se perdia.
+ * Aqui a parada mais clara é um navy profundo: mesmo movimento, mesma família
+ * de cor, mas com contraste sobrando para o texto.
+ */
+.wec-gradient-deep {
+  background: linear-gradient(
+    120deg,
+    #03060d 0%,
+    #05101f 24%,
+    #071b3d 46%,
+    #0a2a5e 64%,
+    #061631 82%,
+    #03070f 100%
+  );
+  background-size: 280% 280%;
+  animation: wec-gradient-move 18s linear infinite;
+}
+
 /* Mapa-múndi PONTILHADO: grade de pontos mascarada pela silhueta dos continentes */
 .wec-dotmap {
   background-image: radial-gradient(
@@ -274,7 +295,8 @@ body {
    * é um movimento lento e discreto, solicitado explicitamente. Mantém-se
    * animando mesmo com "reduzir movimento"; o restante do site respeita.
    */
-  .wec-gradient {
+  .wec-gradient,
+  .wec-gradient-deep {
     animation: wec-gradient-move 18s linear infinite !important;
   }
   .wec-aurora {

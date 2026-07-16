@@ -19,22 +19,24 @@ export function Hero() {
       {/* Fundo: o mesmo da tela de seleção de versões — degradê azul animado,
           auroras em movimento e o mapa-múndi pontilhado (alusão ao "World").
           As classes vivem em globals.css e são compartilhadas com o índice. */}
-      <div className="wec-gradient absolute inset-0 -z-30" aria-hidden />
+      <div className="wec-gradient-deep absolute inset-0 -z-30" aria-hidden />
 
+      {/* Auroras em intensidade reduzida: na tela de seleção elas podem brilhar,
+          aqui precisam ceder espaço para a headline. */}
       <div
-        className="wec-aurora absolute -left-40 -top-40 -z-20 h-[42rem] w-[42rem] rounded-full bg-[radial-gradient(circle,rgba(34,211,238,0.34),transparent_62%)] blur-3xl"
+        className="wec-aurora absolute -left-40 -top-40 -z-20 h-[42rem] w-[42rem] rounded-full bg-[radial-gradient(circle,rgba(34,211,238,0.16),transparent_62%)] blur-3xl"
         aria-hidden
       />
       <div
-        className="wec-aurora-slow absolute -right-48 top-1/4 -z-20 h-[40rem] w-[40rem] rounded-full bg-[radial-gradient(circle,rgba(37,99,235,0.32),transparent_62%)] blur-3xl"
+        className="wec-aurora-slow absolute -right-48 top-1/4 -z-20 h-[40rem] w-[40rem] rounded-full bg-[radial-gradient(circle,rgba(37,99,235,0.18),transparent_62%)] blur-3xl"
         aria-hidden
       />
       <div
-        className="wec-aurora-b absolute -bottom-40 left-1/4 -z-20 h-[36rem] w-[36rem] rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.28),transparent_62%)] blur-3xl"
+        className="wec-aurora-b absolute -bottom-40 left-1/4 -z-20 h-[36rem] w-[36rem] rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.14),transparent_62%)] blur-3xl"
         aria-hidden
       />
       <div
-        className="wec-aurora-c absolute right-1/4 bottom-0 -z-20 h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,rgba(29,78,216,0.30),transparent_62%)] blur-3xl"
+        className="wec-aurora-c absolute right-1/4 bottom-0 -z-20 h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,rgba(29,78,216,0.16),transparent_62%)] blur-3xl"
         aria-hidden
       />
 
@@ -44,9 +46,15 @@ export function Hero() {
       </div>
 
       {/* Grade tecnológica + vinheta + grão */}
-      <div className="bg-grid absolute inset-0 -z-10 opacity-30" aria-hidden />
+      <div className="bg-grid absolute inset-0 -z-10 opacity-25" aria-hidden />
       <div
         className="absolute inset-0 -z-10 bg-[radial-gradient(120%_90%_at_50%_-10%,transparent_40%,rgba(3,6,15,0.7)_100%)]"
+        aria-hidden
+      />
+      {/* Véu atrás da headline: garante o contraste do texto em degradê mesmo
+          quando a parada mais clara do fundo passa por trás dele. */}
+      <div
+        className="absolute inset-0 -z-10 bg-[radial-gradient(70%_45%_at_50%_16%,rgba(3,7,15,0.55),transparent_72%)]"
         aria-hidden
       />
       <div className="noise" aria-hidden />
